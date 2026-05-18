@@ -1,0 +1,125 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+<!-- Start Blog Details --> 
+<div class="cs_height_170"></div> 
+<div class="container"> 
+    <ol class="breadcrumb"> 
+        <li class="breadcrumb-item"><a href="/">{% trans %}Home{% endtrans %}</a></li> 
+        <li class="breadcrumb-item"><a href="/blog">{% trans %}Blog{% endtrans %}</a></li> 
+        <li class="breadcrumb-item active">{{ news.title }}</li> 
+    </ol> 
+    <div class="cs_height_18"></div> 
+    
+    {# Kichwa cha habari cha blog kutoka Sulu #}
+    <h1 class="cs_fs_72 mb-0">{{ news.title }}</h1> 
+    <div class="cs_height_54"></div> 
+    
+    <div class="cs_blog_details_info"> 
+        <div class="cs_blog_details_info_left"> 
+            {# Makundi / Categories za habari #}
+            <div class="cs_blog_details_tags"> 
+    {% if news.type is defined and news.type is not null %}
+        <a href="#">{{ news.type }}</a>
+    {% endif %}
+</div>
+
+            
+            {# Tarehe na Mwandishi kutoka Sulu #}
+            <div class="cs_blog_details_date">
+                {% if news.showDate %}
+                    {{ news.publishedAt|format_datetime('long', 'none', locale=app.request.locale) }}
+                {% endif %}
+                {% if news.showAuthor %}
+                    {% set contact = sulu_resolve_contact(news.author) %}
+
+                    | {{ contact.fullName }}
+                {% endif %}
+            </div> 
+        </div> 
+        
+    </div> 
+    
+    
+    {# Picha kuu ya Blog kutoka Sulu Media #}
+    {% if news.image %} 
+    {% set image = sulu_resolve_media(news.image.id, app.request.locale) %} 
+    {% set source = image.formats['1626x760'] 
+        is defined and image.formats['1626x760'] is not empty
+        ? image.formats['1626x760'] 
+        : image.url %} 
+        <div class="image mb-5 mt-5">
+        <img src="{{ source }}" title="{{ news.title }}" alt="{{ news.title }}" class="w-100 cs_radius_20"> 
+        </div>
+    {% endif %}
+    
+    <div class="cs_height_90 cs_height_lg_50"></div> 
+    
+    <div class="row"> 
+        <div class="col-lg-8"> 
+            <div class="cs_blog_details"> 
+
+             {{ news.text|raw }}
+             
+                
+            </div> 
+            <div class="cs_height_85"></div>            
+            
+        </div>
+        <!-- Kipande cha Pili: Sidebar na Related Articles -->
+        <div class="col-lg-4"> 
+            <div class="cs_sidebar"> 
+                
+                {# 1. Popular Categories kutoka Sulu #}
+                <!--<div class="cs_sidebar_item widget_categories"> 
+                    <h2 class="cs_sidebar_widget_title">{% trans %}News Categories{% endtrans %}</h2> 
+                    <ul> 
+    {% if news.type is defined and news.type is not null %}
+        <li><a href="#">{{ news.type|capitalize }}</a></li>
+    {% else %}
+        <li><a href="#">{% trans %}Blogs{% endtrans %}</a></li> 
+    {% endif %} 
+                  </ul>
+
+                </div> -->
+
+                {# 2. Popular Articles / Recent Posts kutoka Sulu #}
+                <div class="cs_sidebar_item"> 
+                    <!--<h2 class="cs_sidebar_widget_title">{% trans %}Popular Articles{% endtrans %}</h2> -->
+                    <ul class="cs_popular_posts"> 
+                        <li> 
+                            <div class="cs_popular_post"> 
+            {{ render(controller('App\\Controller\\NewsController::recent', { 
+                'excludeId': news.id 
+            })) }}
+                            </div> 
+                        </li> 
+                    </ul> 
+                </div> 
+                                
+                {# 3. Newsletter Form #}
+                <div class="cs_sidebar_item widget_categories"> 
+                    <div class="cs_newsletter cs_style2"> 
+                        <h2 class="cs_newsletter_title">{% trans %}Newsletter Sign Up Form{% endtrans %}</h2> 
+                        <form action="#" class="cs_newsletter_form"> 
+                            <input type="email" class="cs_newsletter_input" placeholder="{% trans %}Enter your Email Address{% endtrans %}"> 
+                            <button class="cs_btn cs_style_1"> 
+                                <span>{% trans %}Subscribe Newsletter{% endtrans %}</span> 
+                                <i> 
+                                    <img src="{{ asset('assets/img/icons/arrow_white.svg') }}" alt="Icon"> 
+                                    <img src="{{ asset('assets/img/icons/arrow_white.svg') }}" alt="Icon"> 
+                                </i> 
+                            </button> 
+                        </form> 
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
+    </div> {# Hapa tunafunga ile row kuu ya gridi #}
+    <div class="cs_height_135 cs_height_lg-100"></div> 
+    
+    </div> 
+</div> 
+<!-- End Blog Details -->
+
+{% endblock %}

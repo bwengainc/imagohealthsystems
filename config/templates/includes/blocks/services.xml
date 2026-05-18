@@ -1,0 +1,82 @@
+<properties xmlns="http://schemas.sulu.io/template/template"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">            
+    
+    <block name="blocks" default-type="services">
+        <meta>
+            <title lang="en">Service Area Block</title>
+        </meta>
+        <types>
+            <type name="services">
+                <meta>
+                    <title lang="en">Service Area Section</title>
+                </meta>
+                <properties>                    
+                    <!-- Main Title (e.g., "Provides Our Best Services") -->
+                    <property name="title" type="text_line">
+                        <meta>
+                            <title lang="en">Section Main Title</title>
+                        </meta>
+                    </property>
+
+                    <!-- Subtitle (e.g., "Core Areas") -->
+                    <property name="subtitle" type="text_line">
+                        <meta>
+                            <title lang="en">Section Subtitle</title>
+                        </meta>
+                    </property>
+                    
+                    <!-- Nested Service Items Loop -->
+                    <block name="items" default-type="item" minOccurs="1">
+                        <meta>
+                            <title lang="en">Service Cards</title>
+                        </meta>
+                        <types>
+                            <type name="item">
+                                <meta>
+                                    <title lang="en">Service Card Item</title>
+                                </meta>
+                                <properties>
+                                    <!-- Changed minOccurs to 0 so either an image selection OR an icon class can be used optionally -->
+                                    <property name="image" type="media_selection" minOccurs="0" maxOccurs="1">
+                                        <meta>
+                                            <title lang="en">Service Icon SVG/Image</title>
+                                        </meta>
+                                        <params>
+                                            <param name="types" value="image"/>
+                                        </params>
+                                    </property>
+                                    
+                                    <property name="icon" type="text_line">
+                                        <meta>
+                                            <title lang="en">FontAwesome Icon Class (Optional fallback)</title>
+                                        </meta>
+                                    </property>
+                                    
+                                    <property name="title" type="text_line">
+                                        <meta>
+                                            <title lang="en">Service Card Title</title>
+                                        </meta>
+                                    </property>
+                                    
+                                    <!-- CHANGED: Switched from text_area to text_editor to fully enable formatting and bullet lists -->
+                                    <property name="description" type="text_editor">
+                                        <meta>
+                                            <title lang="en">Service Description / Bullet Points</title>
+                                        </meta>
+                                    </property>
+                                    
+                                    <property name="link" type="resource_locator">
+                                        <meta>
+                                            <title>Link</title>
+                                        </meta>
+                                    </property>
+                                </properties>
+                            </type>
+                        </types>
+                    </block>
+                </properties>
+            </type>
+        </types>
+    </block>
+</properties>

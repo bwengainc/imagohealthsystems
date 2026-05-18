@@ -1,0 +1,181 @@
+/* 1. Force the normal arrow cursor back on the entire webpage */
+html, body {
+    cursor: default !important;
+}
+
+/* 2. Force the standard clickable HAND cursor on all interactive elements */
+a, 
+button, 
+select, 
+input[type="submit"], 
+input[type="button"],
+.btn,
+[role="button"] {
+    cursor: pointer !important;
+}
+
+/* 3. Keep the annoying custom tracking shapes completely hidden */
+.cursor, 
+.cs_cursor_lg, 
+.cs_cursor_sm,
+.cs-cursor_1,
+.cs-cursor_2 {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Language selector */ 
+.language-switcher .locale-list { 
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+    display: inline-block; /* Prevents the list from stretching 100% wide */
+} 
+
+.language-switcher .locale-item { 
+    position: relative; 
+    display: inline-block; /* Keeps the container tightly bound to the text size */
+} 
+
+.language-switcher .locale-link { 
+    display: inline-flex; /* Use inline-flex to fit text tightly */
+    align-items: center; 
+    padding: 6px 12px; 
+    text-decoration: none; 
+    color: #fff; /* default text color */ 
+    white-space: nowrap; /* Prevents text from breaking into two lines */
+} 
+
+.language-switcher .locale-link img.flag-icon { 
+    width: 20px; 
+    height: auto; 
+    margin-right: 8px; 
+} 
+
+/* The Downward Chevron Arrow */
+.language-switcher .dropdown-arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 6px;
+    vertical-align: middle;
+    border-top: 4px solid #fff; /* White arrow */
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    transition: transform 0.2s ease;
+}
+
+/* Flip the arrow on hover */
+.language-switcher .locale-item:hover .dropdown-arrow {
+    transform: rotate(-180deg);
+}
+
+.language-switcher .locale-submenu { 
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    background: #fff; 
+    border: 1px solid #ddd; 
+    list-style: none; 
+    width: 100%; /* 💡 FORCES the dropdown to be EXACTLY as wide as the button above it */
+    min-width: max-content; /* Ensures long language names won't wrap ugly */
+    padding: 5px 0; 
+    z-index: 1000; 
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1); /* Optional layout polish */
+} 
+
+.language-switcher .locale-item:hover .locale-submenu { 
+    display: block; 
+} 
+
+/* Default submenu links */ 
+.language-switcher .locale-submenu li a { 
+    display: flex; 
+    align-items: center; 
+    padding: 5px 12px; /* Matches horizontal padding of the main link */
+    text-decoration: none; 
+    color: #333; /* normal text color */ 
+    white-space: nowrap;
+} 
+
+/* Hover effect */ 
+.language-switcher .locale-submenu li a:hover { 
+    background: #f5f5f5; 
+    color: #333; 
+} 
+
+/* Active language link */ 
+.language-switcher .locale-link.active { 
+    background-color: blue; 
+    color: #fff; /* white text on blue background */ 
+    border-radius: 4px; 
+}
+
+
+/* Force identical spacing for the flag icon inside the dropdown list on hover */
+.language-switcher .locale-submenu li a img,
+.language-switcher .locale-submenu li a img.flag-icon { 
+    width: 20px !important; 
+    height: auto !important; 
+    margin-right: 8px !important; /* 💡 This forces the space between the flag and the text */
+    display: inline-block !important;
+}
+
+
+
+.cs_heading_color {
+  color: #274760;
+}
+
+.cs_body_color {
+  color: rgba(39, 71, 96, 0.52);
+}
+
+.cs_accent_color {
+  color: #051935 !important;
+}
+
+.cs_white_color {
+  color: #F8F9FB !important;
+}
+
+.cs_white_bg {
+  background-color: #ffffff;
+}
+
+.cs_accent_bg {
+  background-color: #051935 !important;
+}
+
+.cs_accent_bg-light {
+  background-color: #051935 !important;
+}
+
+.cs_gray_bg_1 {
+  background-color: rgba(210, 234, 239, 0.2);
+}
+
+
+
+.cs_scrollup {
+    color: #051935 !important;
+    background-color:#CFAC62 !important;
+    -webkit-box-shadow: 0 4px 20px 0 rgba(39, 71, 96, .17);
+    box-shadow: 0 4px 20px 0 rgba(39, 71, 96, .17);
+    
+}
+
+
+.cs_main_header{
+    background: #F8F9FB !important;
+}
+
+
+@media (min-width: 1701px) {
+    .cs_iconbox.cs_style_4 .cs_iconbox_subtitle {
+        padding-right: 0% !important;
+    }
+}

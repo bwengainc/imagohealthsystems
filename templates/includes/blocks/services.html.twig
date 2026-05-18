@@ -1,0 +1,80 @@
+<!-- Start Services Section --> 
+<section> 
+    <div class="cs_height_200 cs_height_xl_150 cs_height_lg_110"></div> 
+    <div class="container"> 
+        <div class="row"> 
+            
+            <!-- Dynamic Section Heading -->
+            <div class="col-md-6 col-xl-4"> 
+                <div class="cs_section_heading cs_style_1"> 
+                    {% if content.subtitle is defined and content.subtitle is not empty %}
+                        <h3 class="cs_section_subtitle text-uppercase cs_accent_color cs_semibold m-0 cs_accent_color cs_fs_32">
+                            {{ content.subtitle }}
+                        </h3> 
+                    {% endif %}
+                    <div class="cs_height_5"></div> 
+                    {% if content.title is defined and content.title is not empty %}
+                        <h2 class="cs_section_title cs_fs_72 m-0">
+                            {{ content.title }}
+                        </h2> 
+                    {% endif %}
+                </div> 
+                <div class="cs_height_70 cs_height_lg_50"></div> 
+            </div> 
+
+            <!-- Dynamic Services Block Items Loop -->
+            {% if content.items is defined and content.items is not empty %}
+                {% for item in content.items %}
+                    <div class="col-md-6 col-xl-4"> 
+                        <div class="cs_iconbox cs_style_4"> 
+                            
+                            <!-- Icon / Graphic Box Container -->
+                            <div class="cs_iconbox_icon cs_accent_bg rounded-circle cs_center"> 
+                                {# Target the first image selection cleanly using your exact index array syntax #}
+                                {% if item.image[0] is defined %}
+                                    {% set media = item.image[0] %}
+                                    {# Uses your customized 600x400 image crop fallback if available #}
+                                    {% set imageSrc = media.formats['600x400'] ?? media.url %}
+                                    <img src="{{ imageSrc }}" alt="{{ media.title }}">
+                                
+                                {# Fall back to raw FontAwesome CSS icon class if defined instead #}
+                                {% elseif item.icon is defined and item.icon is not empty %}
+                                    <i class="{{ item.icon }} text-white cs_fs_32"></i>
+                                
+                                {# Style framework asset fallback if both entries are omitted #}
+                                {% else %}
+                                    <img src="{{ asset('assets/img/icons/calendar_white.svg') }}" alt="Default Icon">
+                                {% endif %}
+                            </div> 
+                            
+                            <!-- Card Title Header -->
+                            {% if item.title is defined and item.title is not empty %}
+                                <h2 class="cs_iconbox_title cs_fs_32">
+                                    {{ item.title }}
+                                </h2> 
+                            {% endif %}
+                            
+                            <!-- Card Description Field (Supports lists/bullet markup cleanly via raw) -->
+                            {% if item.description is defined and item.description is not empty %}
+                                <div class="cs_iconbox_subtitle m-0">
+                                    {{ item.description|raw }}
+                                </div> 
+                            {% endif %}
+                            
+                            <!-- Interactive Navigation Link Button -->
+                            {% if item.link is defined and item.link is not empty %}
+                                <a href="{{ item.link }}" class="cs_iconbox_btn cs_center"> 
+                                    <img src="{{ asset('assets/img/icons/arrow_white.svg') }}" alt="Icon"> 
+                                    <img src="{{ asset('assets/img/icons/arrow_white.svg') }}" alt="Icon"> 
+                                </a>
+                            {% endif %}
+                            
+                        </div> 
+                    </div> 
+                {% endfor %}
+            {% endif %}
+
+        </div> 
+    </div> 
+</section> 
+<!-- End Services Section -->

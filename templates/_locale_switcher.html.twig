@@ -1,0 +1,66 @@
+<!--
+<div class="language">
+    {% if localizations is defined and localizations|length > 1 %}
+        <span class="icon">
+            <img src="{{ asset('assets/images/languages/' ~ app.request.locale ~ '.png') }}" alt="">
+        </span>
+
+        <form action="#" class="language-switcher">
+            <select class="selectpicker" onchange="window.location.href=this.value;">
+                {% for localization in localizations %}
+                    {#% set language_name = localization.locale|locale_name(localization.locale)|capitalize %#}
+                    {% set language_name = localization.locale|upper %}
+
+                    {% set flag_url = asset('assets/images/languages/' ~ localization.locale ~ '.png') %}
+                    {% set is_active = (localization.locale == app.request.locale) %}
+
+                    <option value="{{ localization.url }}" 
+                            {# 'title' ensures the name appears when the dropdown is closed #}
+                            title="{{ language_name }}"
+                            {# 'data-content' allows the image + name inside the menu #}
+                            data-content="<img src='{{ flag_url }}' width='20' class='me-2'> <span>{{ language_name }}</span>"
+                            {{ is_active ? 'selected' : '' }}>
+                        {{ language_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    {% endif %}
+</div>
+-->
+
+
+<div class="language">
+    {% if localizations is defined and localizations|length > 1 %}
+        <div class="language-switcher">
+            <ul class="locale-list">
+                <li class="locale-item">
+                    {# Display Active Current Locale Selection with Downward Arrow #}
+                    {% set current_flag = asset('assets/images/languages/' ~ app.request.locale ~ '.png') %}
+                    <a href="#" class="locale-link active" onclick="return false;">
+                        <img src="{{ current_flag }}" class="flag-icon" alt="{{ app.request.locale|upper }}">
+                        <span>{{ app.request.locale|upper }}</span>
+                        <span class="dropdown-arrow"></span>
+                    </a>
+                    
+                    {# Hidden Hover Secondary Navigation Submenu Box #}
+                    <ul class="locale-submenu">
+                        {% for localization in localizations %}
+                            {% if localization.locale != app.request.locale %}
+                                {% set target_flag = asset('assets/images/languages/' ~ localization.locale ~ '.png') %}
+                                <li>
+                                    <a href="{{ localization.url }}">
+                                        <img src="{{ target_flag }}" class="flag-icon" alt="{{ localization.locale|upper }}">
+                                        <span>{{ localization.locale|upper }}</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+</div>
+
+
