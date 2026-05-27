@@ -1,0 +1,92 @@
+<properties xmlns="http://schemas.sulu.io/template/template"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">             
+    
+    <block name="blocks" default-type="faq">
+        <meta>
+            <title lang="en">Page Content Blocks</title>
+        </meta>
+        <types>
+            
+            <!-- SEHEMU MAALUM YA FAQ PEKEE -->
+            <type name="faq">
+                <meta>
+                    <title lang="en">FAQ Area Section</title>
+                </meta>
+                <properties>
+                    
+                    <property name="faq_title" type="text_line">
+                        <meta>
+                            <title lang="en">FAQ Section Heading Title</title>
+                            <title lang="sw">Kichwa cha Sehemu ya FAQ</title>
+                        </meta>
+                    </property>
+
+                    <block name="items" default-type="item" minOccurs="1">
+                        <meta>
+                            <title lang="en">FAQ Cards</title>
+                        </meta>
+                        <types>
+                            <type name="item">
+                                <meta>
+                                    <title lang="en">FAQ Card Item</title>
+                                </meta>
+                                <properties>
+                                                    <property name="question" type="text_line">
+                                                        <meta>
+                                                            <title lang="en">Question</title>
+                                                        </meta>
+                                                    </property>
+                                                    <property name="answer" type="text_area">
+                                                        <meta>
+                                                            <title lang="en">Answer Content</title>
+                                                        </meta>
+                                                    </property>
+                                        
+                                </properties>
+                            </type>
+                        </types>
+                    </block>
+
+    <!--Why-choose-us-image-->
+    <property name="main_image" type="media_selection">
+    <meta>
+        <title lang="en">Main About Image (JPEG)</title>
+        <title lang="sw">Picha Kuu ya Kuhusu (JPEG)</title>
+    </meta>
+    <params>
+        <param name="types" value="image"/>
+        <param name="max" value="1"/>
+    </params>
+</property>
+
+<property name="mini_badge_image" type="media_selection">
+    <meta>
+        <title lang="en">Rotating Mini Badge (SVG)</title>
+        <title lang="sw">Nembo Ndogo Inayozunguka (SVG)</title>
+    </meta>
+    <params>
+        <param name="types" value="image"/>
+        <param name="max" value="1"/>
+    </params>
+</property>
+
+<property name="tick_icon" type="media_selection">
+    <meta>
+        <title lang="en">Checkmark Tick Icon (SVG)</title>
+        <title lang="sw">Alama ya Vekta/Tik (SVG)</title>
+    </meta>
+    <params>
+        <param name="types" value="image"/>
+        <param name="max" value="1"/>
+    </params>
+</property>
+<!--END-->
+
+
+                </properties>
+            </type>
+
+        </types>
+    </block>
+</properties>

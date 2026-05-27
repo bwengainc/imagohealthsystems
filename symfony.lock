@@ -103,6 +103,9 @@
     "manuxi/sulu-shared-tools-bundle": {
         "version": "0.4.2"
     },
+    "manuxi/sulu-testimonials-bundle": {
+        "version": "1.3.5"
+    },
     "massive/build-bundle": {
         "version": "0.5.7"
     },
@@ -201,6 +204,19 @@
         },
         "files": [
             "config/routes/sulu_automation_admin.yaml"
+        ]
+    },
+    "sulu/form-bundle": {
+        "version": "2.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.4",
+            "ref": "a0aabdf6ea613c7ecce4f195b233564102161feb"
+        },
+        "files": [
+            "config/packages/sulu_form.yaml",
+            "config/routes/sulu_form_admin.yaml"
         ]
     },
     "symfony-cmf/routing-bundle": {

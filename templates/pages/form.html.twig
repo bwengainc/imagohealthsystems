@@ -1,0 +1,127 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+{% if content.header_image|default([])|length > 0 %}
+    {% set media = content.header_image[0] %}
+    {% set bgUrl = media.formats['1626x760']|default(media.url) %}
+{% else %}
+    {% set bgUrl = 'assets/images/background/bg-9.jpg' %}
+{% endif %}
+
+    <!-- Start Banner  -->
+    <section class="cs_banner cs_style_5 cs_bg_filed" data-src="{{ bgUrl }}">
+      <div class="cs_banner_img">
+    {% if content.banner_image|default([])|length > 0 %}
+        {% set media = content.banner_image[0] %}
+        {% set optimized_url = media.formats['881x579']|default(media.url) %}
+        <img src="{{ optimized_url }}" alt="{{ content.title|default('Banner Image') }}" class="cs_main_banner_img">
+    {% else %}
+        {# Fallback ya picha ya asili ya static asset #}
+        <img src="{{ asset('assets/img/contact/banner_img.png') }}" alt="Banner Image" class="cs_main_banner_img">
+    {% endif %}
+</div>
+      <div class="container">
+        <h2 class="cs_banner_title cs_fs_72">{{ content.title|default('Contact Us') }}</h2>
+       <p class="cs_banner_subtitle cs_fs_20 mb-0 cs_heading_color">
+    {{ content.header_subtitle|default('Kindly reach us to get the fastest response and treatment') }}</p>
+      </div>
+    </section>
+    <!-- End Banner  -->
+
+    <!-- Start Contact Section -->
+    <section>
+      <div class="container cs_mt_minus_110">
+        <div class="row">
+          <div class="col-lg-10 offset-lg-1">
+          
+            <div class="contact-form">
+                            {% if content.form %}
+                                {% if app.request.get('send') != 'true' %}
+                                    {% form_theme content.form 'form/theme.html.twig' %}
+                                    {{ form(content.form) }}
+                                {% else %}
+                                    <div id="success">
+                                        <div role="alert" class="alert alert-success">
+                                            {{ view.form.entity.successText|raw }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+          </div>
+        </div>
+        <div class="cs_height_200 cs_height_xl_150 cs_height_lg_100"></div>
+
+        {% set account = webspaceSettings.content.account.entity|default %}
+                        {% if account %}
+                            {% set address = account.accountAddresses[0].address %}
+        <!--<h2 class="cs_fs_72 mb-0">Find Us Here</h2>-->
+        <div class="cs_height_70 cs_height_lg_50"></div>
+        <div class="row g-4 g-xl-3 g-xxl-5">
+          <div class="col-xl-4">
+            <div class="cs_iconbox cs_style_11 cs_radius_25">
+              <div class="cs_iconbox_icon">
+        {% set media = sulu_resolve_media(content.phone_icon.ids|default(content.phone_icon)[0]|default(content.phone_icon), 'prod') %}
+        <img src="{{ media.url|default }}" alt="Phone Icon">
+
+              </div>
+              <div class="cs_iconbox_right">
+                <h3 class="cs_iconbox_title cs_fs_24 mb-0">{{ content.phone_title|default('Phone') }}</h3>
+                <p class="cs_iconbox_subtitle mb-0 cs_heading_color">
+                 <a href="tel:{{ account.mainPhone }}">{{ account.mainPhone }}</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="cs_iconbox cs_style_11 cs_radius_25">
+              <div class="cs_iconbox_icon">
+               {% set media = sulu_resolve_media(content.email_icon.ids|default(content.email_icon)[0]|default(content.email_icon), 'prod') %}
+            <img src="{{ media.url|default }}" alt="Email Icon">
+              </div>
+              <div class="cs_iconbox_right">
+                <h3 class="cs_iconbox_title cs_fs_24 mb-0">{{ content.email_title|default('Email') }}</h3>
+                <p class="cs_iconbox_subtitle mb-0 cs_heading_color">
+                 <a href="mailto:{{ account.mainEmail }}">{{ account.mainEmail }}</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="cs_iconbox cs_style_11 cs_radius_25">
+              <div class="cs_iconbox_icon">
+{% set media = sulu_resolve_media(content.location_icon.ids|default(content.location_icon)[0]|default(content.location_icon), 'prod') %}
+<img src="{{ media.url|default }}" alt="Phone Icon">
+              </div>
+              <div class="cs_iconbox_right">
+                <h3 class="cs_iconbox_title cs_fs_24 mb-0"> {{ content.location_title|default('Location') }}</h3>
+                <p class="cs_iconbox_subtitle mb-0 cs_heading_color">
+                {{ address.street }}, {{ address.city }} {#{ address.zip ~ ' ' ~ address.city }#}
+                                            {{ country(address.countryCode) }}
+                                            {% if address.note is defined %}{{ address.note }}
+                                            {% endif %}
+                                            </p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="cs_height_35"></div>
+        <!-- Start Google Map -->
+      <div class="cs_map">
+      {% if content.map_url is defined and content.map_url is not empty %}
+        {# Renders the dynamic map URL filled in the Sulu Admin text field #}
+        <iframe id="map" src="{{ content.map_url }}" allowfullscreen></iframe>
+       {% else %}
+        {# Fallback static iframe if the admin leaves the field empty #}
+        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96652.27317354927!2d-74.33557928194516!3d40.79756494697628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3a82f1352d0dd%3A0x81d4f72c4435aab5!2sTroy+Meadows+Wetlands!5e0!3m2!1sen!2sbd!4v1563075599994!5m2!1sen!2sbd" allowfullscreen></iframe>
+    {% endif %}
+      </div>
+      <!-- End Google Map -->
+      </div>
+    </section>
+        <div class="cs_height_200 cs_height_xl_150 cs_height_lg_110"></div>
+
+
+{% endblock %}

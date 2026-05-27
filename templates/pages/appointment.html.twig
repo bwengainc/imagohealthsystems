@@ -1,0 +1,92 @@
+  
+  {% extends "base.html.twig" %}
+
+{% block content %}
+
+{% if content.appointment_header_image|default([])|length > 0 %}
+    {% set media = content.appointment_header_image[0] %}
+    {% set bgUrl = media.formats['1626x760']|default(media.url) %}
+{% else %}
+    {% set bgUrl = 'assets/img/appointments/banner_img.png' %}
+{% endif %}
+  <!-- Start Banner  -->
+    <section class="cs_banner cs_style_3 cs_bg_filed" data-src="{{ bgUrl }}">
+      <div class="cs_banner_img">
+         {% if content.appointment_banner_image|default([])|length > 0 %}
+        {% set media = content.appointment_banner_image[0] %}
+        {% set optimized_url = media.formats['881x579']|default(media.url) %}
+        <img src="{{ optimized_url }}" alt="{{ content.title|default('Banner Image') }}" class="cs_main_banner_img">
+    {% else %}
+        {# Fallback ya picha ya asili ya static asset #}
+        <img src="{{ asset('assets/img/appointments/banner_img.png') }}" alt="Banner Image" class="cs_main_banner_img">
+    {% endif %}
+      </div>
+      <div class="container">
+        <div class="cs_banner_text">
+          <h2 class="cs_banner_title cs_fs_72">{{ content.title|default('Appointment') }}</h2>
+          <p class="cs_banner_subtitle cs_fs_20 mb-0 cs_heading_color"> {{ content.appointment_header_subtitle|default('Fill out the appointment form below to schedule a consultation with one of our healthcare professionals.') }}</p>
+        </div>
+      </div>
+    </section>
+    <!-- End Banner  -->
+
+  <!-- Start Appointment -->
+    <section>
+      <div class="cs_height_200 cs_height_xl_150 cs_height_lg_110"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+          <h2 class="cs_fs_40 cs_medium mb-0">{{ content.title|default('Appointment') }}</h2>
+            <div class="cs_height_42 cs_height_xl_25"></div>
+            <div class="contact-form">
+                            {% if content.appointment_form %}
+                                {% if app.request.get('send') != 'true' %}
+                                    {% form_theme content.appointment_form 'form/appointment_theme.html.twig' %}
+                                    {{ form(content.appointment_form) }}
+                                {% else %}
+                                    <div id="success">
+                                        <div role="alert" class="alert alert-success">
+                                            {{ view.form.entity.successText|raw }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+            </div>
+          
+          <div class="col-lg-4 offset-lg-1">
+            <div class="cs_height_lg_100"></div>
+            <h2 class="cs_fs_40 cs_medium mb-0">{% trans %}contact_info{% endtrans %}</h2>
+            {% set account = webspaceSettings.content.account.entity|default %}
+              {% if account %}
+              {% set address = account.accountAddresses[0].address %}
+        
+            <div class="cs_height_100 cs_height_xl_60"></div>
+            <ul class="cs_contact_info cs_style_1 cs_mp0">
+              <li>
+                <h3 class="cs_fs_24 cs_semibold mb-0">{% trans %}phone{% endtrans %}</h3>
+                <p class="mb-0 cs_heading_color"> <a href="tel:{{ account.mainPhone }}">{{ account.mainPhone }}</a></p>
+              </li>
+              <li>
+                <h3 class="cs_fs_24 cs_semibold mb-0">{% trans %}email_us{% endtrans %}</h3>
+                <p class="mb-0 cs_heading_color"> <a href="mailto:{{ account.mainEmail }}">{{ account.mainEmail }}</a></p>
+              </li>
+              <li>
+                <h3 class="cs_fs_24 cs_semibold mb-0">{% trans %}our_location{% endtrans %}</h3>
+                <p class="mb-0 cs_heading_color">
+                {{ address.street }}, {{ address.city }} {#{ address.zip ~ ' ' ~ address.city }#}
+                                            {{ country(address.countryCode) }}
+                                            {% if address.note is defined %}{{ address.note }}
+                                            {% endif %}
+                </p>
+              </li>
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+    <!-- End Appointment -->
+    <div class="cs_height_200 cs_height_xl_150 cs_height_lg_110"></div>
+
+    {% endblock %}

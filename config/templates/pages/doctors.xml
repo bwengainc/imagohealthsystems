@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>doctors</key>
+
+    <view>pages/doctors</view>
+    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+    <cacheLifetime>1209600</cacheLifetime>
+
+    <meta>
+        <title lang="en">Doctors List</title>
+    </meta>
+
+    <properties>
+        <section name="banner_section">
+            <meta>
+                <title lang="en">Banner Content</title>
+            </meta>
+            <properties>
+                <property name="banner_bg_svg" type="media_selection">
+                    <meta><title lang="en">Banner Background SVG</title></meta>
+                    <params><param name="max" value="1"/></params>
+                </property>
+                <property name="banner_image" type="media_selection">
+                    <meta><title lang="en">Banner Side Image</title></meta>
+                    <params><param name="max" value="1"/></params>
+                </property>
+                <property name="banner_subtitle" type="text_line">
+                    <meta><title lang="en">Banner Subtitle</title></meta>
+                </property>
+                <property name="title" type="text_line" mandatory="true">
+                    <meta><title lang="en">Title / Main Heading</title></meta>
+                    <params><param name="headline" value="true"/></params>
+                    <tag name="sulu.rlp.part"/>
+                </property>
+                <property name="url" type="resource_locator" mandatory="true">
+                    <meta><title lang="en">Resource Locator</title></meta>
+                    <tag name="sulu.rlp"/>
+                </property>
+            </properties>
+        </section>
+
+        <!-- Orodha ya Madaktari (Dynamic Blocks) -->
+        <property name="doctors" type="block">
+            <meta>
+                <title lang="en">Doctors List</title>
+            </meta>
+            <params>
+                <param name="min" value="1"/>
+            </params>
+            <types>
+                <type name="doctor_item">
+                    <meta><title lang="en">Doctor Profile</title></meta>
+                    <properties>
+                        <property name="name" type="text_line">
+                            <meta><title lang="en">Doctor Name (e.g. Dr. Lisa Chen, MD)</title></meta>
+                        </property>
+                        <property name="image" type="media_selection">
+                            <meta><title lang="en">Doctor Photo</title></meta>
+                            <params><param name="max" value="1"/></params>
+                        </property>
+                        <property name="department_name" type="text_line">
+                            <meta><title lang="en">Department Display Label</title></meta>
+                        </property>
+                        <property name="filter_class" type="text_line">
+                            <meta><title lang="en">Sort Filter Class (e.g. emergency opthalmologist, opthalmologist)</title></meta>
+                        </property>
+                        <property name="designation" type="text_line">
+                            <meta><title lang="en">Medical Designation Specialist</title></meta>
+                        </property>
+                        <property name="description" type="text_area">
+                            <meta><title lang="en">Short Biography / Description</title></meta>
+                        </property>
+                        <!--<property name="details_link" type="resource_locator">
+                            <meta><title lang="en">Link to Details Page</title></meta>
+                        </property>-->
+                        <property name="details_link" type="single_page_selection" colspan="6">
+                        <meta><title>Page</title></meta>
+                        </property>
+                        <property name="facebook_url" type="text_line">
+                            <meta><title lang="en">Facebook Link (Optional)</title></meta>
+                        </property>
+                        <property name="linkedin_url" type="text_line">
+                            <meta><title lang="en">LinkedIn Link (Optional)</title></meta>
+                        </property>
+                        <property name="twitter_url" type="text_line">
+                            <meta><title lang="en">Twitter Link (Optional)</title></meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </property>
+    </properties>
+</template>

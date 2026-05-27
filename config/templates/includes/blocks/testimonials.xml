@@ -1,32 +1,30 @@
 <properties xmlns="http://schemas.sulu.io/template/template"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
-    <block name="blocks" default-type="newslist">
+    <block name="blocks" default-type="testimonials">
         <!-- @see https://docs.sulu.io/en/2.2/reference/content-types/block.html -->
 
         <types>
-            <type name="newslist">
+            <type name="testimonials">
                 <meta>
-                    <title lang="en">News</title>
-                    <title lang="de">News</title>
+                    <title lang="en">Testimonials</title>
+                    <title lang="de">Erfahrungsberichte</title>
                 </meta>
 
-                <properties>
-
-<property name="newslist" type="smart_content">
+<properties>
+<property name="testimonials" type="smart_content">
     <meta>
-        <title lang="en">News</title>
-        <title lang="de">News</title>
+        <title lang="en">Testimonials</title>
+        <title lang="de">Erfahrungsberichte</title>
     </meta>
     <params>
-        <param name="provider" value="news"/>
-        <param name="max_per_page" value="10"/>
+        <param name="provider" value="testimonials"/>
+        <param name="max_per_page" value="5"/>
         <param name="page_parameter" value="page"/>
-        <param name="pagination" value="true"/>
     </params>
 </property>
 
-
+ 
 </properties>
             </type>
         </types>

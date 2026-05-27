@@ -1,0 +1,43 @@
+{% set name = "" %}
+{% set organisation = "" %}
+{% if testimonial.showContact|default %}
+    {% set name = testimonial.contact.fullName %}
+{% endif %}
+{% if testimonial.showOrganisation|default %}
+    {% set organisation = testimonial.contact.accountContacts[0].account.name %}
+{% endif %}
+
+<div class="col-lg-4">
+    <div class="testimonials ttm-testimonial-box-view-style1">
+        <div class="testimonial-content">
+            <div class="d-flex align-items-center">
+                <div class="testimonial-avatar">
+                    <div class="testimonial-img">
+                        {% if testimonial.image %}
+                            {% set media = sulu_resolve_media(testimonial.image, app.request.locale) %}
+                            {% set testimonialImage = media.thumbnails["sulu-240x"] %}
+                            <img class="img-fluid" src="{{ asset(testimonialImage) }}" alt="{{ testimonial.title }}">
+                        {% else %}
+                            <img class="img-fluid" src="https://placehold.co/150x150?text=No+Image" alt="testimonial-img">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="testimonial-caption">
+                    <h3>{{ name }}</h3>
+                    <label>{{ organisation }}</label>
+                </div>
+            </div>
+            <div class="ttm-border-line"></div>
+            <div class="star-ratings">
+                <ul class="rating">
+                    {% for i in 1..5 %}
+                        <li class="{{ i <= testimonial.rating ? 'active' : '' }}">
+                            <i class="fa fa-star{% if i > testimonial.rating and testimonial.rating > i - 1 %}-half-o{% endif %}"></i>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <blockquote>{{ testimonial.text|raw }}</blockquote>
+        </div>
+    </div>
+</div>

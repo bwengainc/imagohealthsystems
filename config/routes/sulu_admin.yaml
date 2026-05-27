@@ -100,6 +100,9 @@ sulu_reference_api:
 SuluNewsBundle:
     resource: '@SuluNewsBundle/Resources/config/routes_admin.yaml'
 
+SuluTestimonialsBundle:
+    resource: '@SuluTestimonialsBundle/Resources/config/routes_admin.yaml'
+
 
 
 # to enable audience targeting see: https://docs.sulu.io/en/2.6/bundles/audience_targeting.html

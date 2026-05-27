@@ -64,8 +64,37 @@
         <scale x="1626" y="760"/>
     </format>
 
+ <format key="881x579">
+        <meta>
+            <title lang="en">banner_image Image</title>
+            <title lang="de">banner_image Bild</title>
+        </meta>
+        <scale x="881" y="579"/>
+    </format>
 
+<format key="728x1170">
+        <meta>
+            <title lang="en">banner_image Image</title>
+            <title lang="de">banner_image Bild</title>
+        </meta>
+        <scale x="728" y="1170"/>
+    </format>
 
+<format key="1049x489">
+<meta>
+            <title lang="en">doctordetailsbg Image</title>
+            <title lang="de">doctordetailsbg Bild</title>
+        </meta>
+        <scale x="1049" y="489"/>
+    </format>
+
+<format key="663x735">
+<meta>
+            <title lang="en">doctordetails Image</title>
+            <title lang="de">doctordetails Bild</title>
+        </meta>
+        <scale x="663" y="735"/>
+    </format>
 
 
 </formats>

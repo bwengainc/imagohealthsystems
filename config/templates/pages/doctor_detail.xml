@@ -1,0 +1,180 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>doctor_detail</key>
+    <view>pages/doctor_detail</view>
+    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+    <cacheLifetime>1209600</cacheLifetime>
+
+    <meta>
+        <title lang="en">Doctor Details Profile</title>
+    </meta>
+
+    <properties>
+        
+                <property name="doctor_details_bg" type="media_selection">
+                    <meta><title lang="en">Header Background Image (Optional)</title></meta>
+                    <params><param name="max" value="1"/></params>
+                </property>
+
+                
+                        
+
+ 
+        <!-- 1. Kichwa cha ukurasa na URL -->
+        <property name="title" type="text_line" mandatory="true">
+            <meta><title lang="en">Doctor Full Name (e.g. Dr. Nancy Urassa, MD)</title></meta>
+            <params><param name="headline" value="true"/></params>
+            <tag name="sulu.rlp.part"/>
+        </property>
+
+        <property name="introduction" type="text_line">
+            <meta><title lang="en">Doctor Introduction</title></meta>
+        </property>
+
+        <property name="position" type="text_line">
+            <meta><title lang="en">Position</title></meta>
+        </property>
+
+        <property name="url" type="resource_locator" mandatory="true">
+            <meta><title lang="en">Resource Locator / URL</title></meta>
+            <tag name="sulu.rlp"/>
+        </property>
+
+        <!-- 2. Picha na Idara -->
+        <property name="doctor_image" type="media_selection">
+            <meta><title lang="en">Doctor Profile Photo</title></meta>
+            <params>
+                <param name="types" value="image"/>
+                <param name="max" value="1"/>
+            </params>
+        </property>
+
+        <property name="department" type="text_line">
+            <meta><title lang="en">Department Name (e.g. Psychiatry Department)</title></meta>
+        </property>
+
+        <!-- 3. Mawasiliano Maalum ya Daktari -->
+        <property name="doctor_phone" type="text_line">
+            <meta><title lang="en">Doctor Direct Phone Line</title></meta>
+        </property>
+
+        <property name="doctor_email" type="text_line">
+            <meta><title lang="en">Doctor Direct Email Address</title></meta>
+        </property>
+
+        <!-- 4. Ratiba Maalum za Daktari (Dynamic Block Loop) -->
+        <property name="schedules" type="block">
+            <meta><title lang="en">Appointment Schedules</title></meta>
+            <types>
+                <type name="schedule_item">
+                    <meta><title lang="en">Schedule Shift</title></meta>
+                    <properties>
+                        <property name="day" type="text_line">
+                            <meta><title lang="en">Day (e.g. Monday)</title></meta>
+                        </property>
+                        <property name="time" type="text_line">
+                            <meta><title lang="en">Time Slot (e.g. 09.00-12.00)</title></meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </property>
+
+
+
+        <!-- Right Column Blocks -->
+        <property name="description" type="text_area">
+                            <meta><title lang="en">Biography / About</title></meta>
+                        </property>
+        <!-- Degrees / Education Block -->
+        <property name="degrees" type="block">
+            <meta><title lang="en">Degrees &amp; Education</title></meta>
+            <params>
+                <param name="min" value="0"/>
+            </params>
+            <types>
+                <type name="degree_item">
+                    <meta><title lang="en">Degree Entry</title></meta>
+                    <properties>
+                        <property name="institution" type="text_line" colspan="6">
+                            <meta><title lang="en">Institution (e.g. University of California)</title></meta>
+                        </property>
+                        <property name="qualification" type="text_line" colspan="6">
+                             <meta><title lang="en">Qualification (e.g. Medical degree)</title></meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </property>
+
+        <!-- Professional Experiences Block -->
+        <property name="experiences" type="block">
+            <meta><title lang="en">Experiences</title></meta>
+            <params>
+                <param name="min" value="0"/>
+            </params>
+            <types>
+                <type name="experience_item">
+                    <meta><title lang="en">Experience Point</title></meta>
+                    <properties>
+                        <property name="text" type="text_area">
+                            <meta><title lang="en">Experience Description</title></meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </property>
+
+        <!-- Awards and Achievements Block -->
+        <property name="awards" type="block">
+            <meta><title lang="en">Awards &amp; Achievements</title></meta>
+            <params>
+                <param name="min" value="0"/>
+            </params>
+            <types>
+                <type name="award_item">
+                    <meta><title lang="en">Award Entry</title></meta>
+                    <properties>
+                        <property name="text" type="text_area">
+                            <meta><title lang="en">Award/Achievement Description</title></meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </property>
+
+         <property name="doctors" type="block">
+            <meta>
+                <title lang="en">Social Media List</title>
+            </meta>
+            <params>
+                <param name="min" value="1"/>
+            </params>
+            <types>
+                <type name="doctor_item">
+                    <meta><title lang="en">Doctor Profile</title></meta>
+                    <properties>
+
+                        <property name="facebook_url" type="text_line">
+                            <meta><title lang="en">Facebook Link (Optional)</title></meta>
+                        </property>
+                        <property name="linkedin_url" type="text_line">
+                            <meta><title lang="en">LinkedIn Link (Optional)</title></meta>
+                        </property>
+                        <property name="twitter_url" type="text_line">
+                            <meta><title lang="en">Twitter Link (Optional)</title></meta>
+                        </property>
+                         </properties>
+                </type>
+            </types>
+        </property>
+
+
+
+
+
+    </properties>
+</template>

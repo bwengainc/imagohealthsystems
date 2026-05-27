@@ -51,4 +51,6 @@ return [
     Sulu\Bundle\AutomationBundle\SuluAutomationBundle::class => ['all' => true],
     Manuxi\SuluSharedToolsBundle\SuluSharedToolsBundle::class => ['all' => true],
     Manuxi\SuluNewsBundle\SuluNewsBundle::class => ['all' => true],
+    Sulu\Bundle\FormBundle\SuluFormBundle::class => ['all' => true],
+    Manuxi\SuluTestimonialsBundle\SuluTestimonialsBundle::class => ['all' => true],
 ];

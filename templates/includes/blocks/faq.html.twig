@@ -1,0 +1,91 @@
+<!-- Start FAQ Section -->
+<section>
+  <div class="cs_height_185 cs_height_xl_145 cs_height_lg_105"></div>
+  <div class="container">
+    <div class="cs_section_heading cs_style_1">
+      <h2 class="cs_section_title cs_fs_72 m-0">
+        {% if content.faq_title is defined and content.faq_title is not empty %}
+            {{ content.faq_title|raw }}
+        {% else %}
+            Frequently Asked <br>Questions
+        {% endif %}
+      </h2>
+    </div>
+    <div class="cs_height_72 cs_height_lg_50"></div>
+    <div class="row cs_gap_y_40">
+      
+      <!-- Left Side Accordions Column -->
+      <div class="col-xl-8">
+        <div class="cs_accordians cs_style1 cs_type_3 cs_heading_color">
+
+          <!-- Dynamic FAQ Items Loop -->
+          {% if content.items is defined and content.items is not empty %}
+            {% for item in content.items %}
+                {% if item.question is defined and item.question is not empty %}
+
+                  <div class="cs_accordian{% if loop.first %} active{% endif %}">
+                    <h2 class="cs_accordian_head cs_heading_color">
+                      {{ item.question|default('No question provided') }} 
+                      <span class="cs_accordian_arrow">
+                        <svg width="23" height="13" viewBox="0 0 23 13" fill="none" xmlns="http://w3.org">
+                          <path d="M22.9996 1.52904C23.0071 1.23098 22.9085 0.938281 22.7175 0.691638C22.5265 0.444996 22.2525 0.256664 21.9337 0.152828C21.615 0.048992 21.2674 0.0348107 20.939 0.112255C20.6107 0.1897 20.3181 0.354922 20.1018 0.584951L11.5264 9.36188L2.95408 0.58495C2.8207 0.425828 2.65137 0.292566 2.45653 0.193511C2.26169 0.094456 2.04557 0.0317421 1.82181 0.00929567C1.59805 -0.0131507 1.37146 0.00515451 1.15614 0.0630648C0.940819 0.120975 0.741392 0.217243 0.570471 0.345839C0.399549 0.474436 0.260902 0.632592 0.162918 0.810402C0.0649357 0.988212 0.00990291 1.18185 0.00121875 1.37918C-0.00746351 1.57651 0.0302848 1.77329 0.112352 1.95719C0.19442 2.14109 0.318905 2.30815 0.478018 2.44791L10.2836 12.4967C10.4372 12.6545 10.6278 12.7812 10.8427 12.8681C11.0575 12.955 11.2914 13 11.528 13C11.7646 13 11.9984 12.955 12.2132 12.8681C12.4281 12.7812 12.6189 12.6545 12.7725 12.4967L22.5875 2.44791C22.8447 2.19407 22.9905 1.86847 22.9996 1.52904Z" 
+                          fill="#d0ac62"/>
+                        </svg>
+                      </span>                 
+                    </h2>
+                    <div class="cs_accordian_body">
+                      {% if item.answer is defined and item.answer is not empty %}
+                        <p>{{ item.answer|nl2br }}</p>
+                      {% endif %}
+                    </div>
+                  </div><!-- .cs_accordian -->
+
+                {% endif %}
+            {% endfor %}
+          {% endif %}
+
+        </div>{# .cs_accordians #}
+      </div>{# .col-xl-8 #}
+
+      <!-- Right Side Images Column -->
+      <div class="col-xl-4">
+        <div class="cs_about cs_style_1 cs_type_2">
+          <div class="cs_about_img">
+            
+            {# FIXED: Changed variable scope from 'item' to global page 'content' #}
+            {% if content.main_image[0] is defined %}
+              {% set media = content.main_image[0] %}
+              {% set imageSrc = media.formats['728x1170'] ?? media.url %}
+            {% else %}
+              {% set imageSrc = 'assets/img/home_4/faq_img.jpeg' %}
+            {% endif %}
+            
+            <img src="{{ imageSrc }}" alt="About" class="w-100">
+            
+            <div class="cs_about_mini_img">
+              {% if content.mini_badge_image[0] is defined %}
+                {% set media = content.mini_badge_image[0] %}
+                {% set miniSrc = media.formats['173x'] ?? media.url %}
+              {% else %}
+                {% set miniSrc = 'assets/img/home_1/about_mini.svg' %}
+              {% endif %}
+
+              {% if content.tick_icon[0] is defined %}
+                {% set media = content.tick_icon[0] %}
+                {% set tickSrc = media.formats['sulu-40x40'] ?? media.url %}
+              {% else %}
+                {% set tickSrc = 'assets/img/icons/tick.svg' %}
+              {% endif %}               
+              
+              <img src="{{ miniSrc }}" alt="Mini" class="cs_rotate_animation">
+              <img src="{{ tickSrc }}" alt="Right" class="cs_right_icon">
+            </div>
+
+          </div>{# .cs_about_img FIXED: Closed tag correctly after nested elements #}
+        </div>{# .cs_about #}
+      </div>{# .col-xl-4 #}
+
+    </div>{# .row #}
+  </div>{# .container #}
+</section>
+<!-- End FAQ Section -->

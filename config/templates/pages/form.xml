@@ -1,0 +1,178 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>form</key>
+
+    <view>pages/form</view>
+    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+    <cacheLifetime>1209600</cacheLifetime>
+
+    <meta>
+        <title lang="en">Form</title>
+        <title lang="de">Formular</title>
+    </meta>
+
+    <properties>
+        <section name="highlight">
+            <properties>
+            <property name="header_image" type="media_selection">
+            <meta>
+                <title lang="en">Breadcrumb Background</title>
+            </meta>
+            <params>
+                <param name="max" value="1"/>
+            </params>
+            </property>
+            <property name="header_subtitle" type="text_line">
+            <meta>
+                        <title lang="en">Banner Subtitle</title>
+            </meta>
+            </property>
+
+        <property name="banner_image" type="media_selection">
+            <meta>
+             <title lang="en">Contact Banner Image</title>
+           </meta>
+           <params>
+               <param name="types" value="image"/>
+               <param name="max" value="1"/>
+           </params>
+        </property>
+
+
+
+                <property name="title" type="text_line" mandatory="true">
+                    <meta>
+                        <title lang="en">Title</title>
+                        <title lang="de">Titel</title>
+                    </meta>
+
+                    <params>
+                        <param name="headline" value="true"/>
+                    </params>
+
+                    <tag name="sulu.rlp.part"/>
+                </property>
+
+                <property name="url" type="resource_locator" mandatory="true">
+                    <meta>
+                        <title lang="en">Resourcelocator</title>
+                        <title lang="de">Adresse</title>
+                    </meta>
+
+                    <tag name="sulu.rlp"/>
+                </property>
+            </properties>
+        </section>
+
+        <property name="form" type="single_form_selection">
+            <meta>
+                <title lang="de">Formular</title>
+                <title lang="en">Form</title>
+            </meta>
+
+            <params>
+                <param name="resourceKey" value="page"/>
+            </params>
+        </property>
+
+        <!--useful also
+        <property name="items" type="block">
+            <meta>
+                <title lang="en">Contact Cards</title>
+            </meta>
+            <params>
+                <param name="min" value="1"/>
+            </params>
+            <types>
+                <type name="item">
+                    <meta>
+                        <title lang="en">Contact Icon Item</title>
+                    </meta>
+                    <properties>
+                        <property name="image" type="media_selection">
+                            <meta>
+                                <title lang="en">Contact Icon SVG/Image</title>
+                            </meta>
+                            <params>
+                                <param name="types" value="image"/>
+                                <param name="max" value="1"/>
+                            </params>
+                        </property>
+                        
+                        <property name="icon" type="text_line">
+                            <meta>
+                                <title lang="en">FontAwesome Icon Class (Optional fallback)</title>
+                            </meta>
+                        </property>
+                        
+                        <property name="title" type="text_line">
+                            <meta>
+                                <title lang="en">Contact Icon Title</title>
+                            </meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </property>
+        -->
+    <!-- 1. SIMU (PHONE) CARD CONFIG -->
+<property name="phone_title" type="text_line">
+    <meta>
+        <title lang="en">Phone Card Title</title>
+    </meta>
+</property>
+<property name="phone_icon" type="media_selection">
+    <meta>
+        <title lang="en">Phone Icon (SVG/Image)</title>
+    </meta>
+    <params>
+        <param name="types" value="image"/>
+        <param name="max" value="1"/>
+    </params>
+</property>
+
+<!-- 2. EMAIL CARD CONFIG -->
+<property name="email_title" type="text_line">
+    <meta>
+        <title lang="en">Email Card Title</title>
+    </meta>
+</property>
+<property name="email_icon" type="media_selection">
+    <meta>
+        <title lang="en">Email Icon (SVG/Image)</title>
+    </meta>
+    <params>
+        <param name="types" value="image"/>
+        <param name="max" value="1"/>
+    </params>
+</property>
+
+<!-- 3. ANUANI (LOCATION) CARD CONFIG -->
+<property name="location_title" type="text_line">
+    <meta>
+        <title lang="en">Location Card Title</title>
+    </meta>
+</property>
+<property name="location_icon" type="media_selection">
+    <meta>
+        <title lang="en">Location Icon (SVG/Image)</title>
+    </meta>
+    <params>
+        <param name="types" value="image"/>
+        <param name="max" value="1"/>
+    </params>
+</property>
+
+    
+
+        <property name="map_url" type="text_line">
+           <meta>
+                <title lang="en">Google Map Embed URL</title>
+            </meta>
+        </property>
+
+    </properties>
+</template>

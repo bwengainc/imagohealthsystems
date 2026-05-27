@@ -13,11 +13,13 @@
                         </h3> 
                     {% endif %}
                     <div class="cs_height_5"></div> 
+                    <!--
                     {% if content.title is defined and content.title is not empty %}
                         <h2 class="cs_section_title cs_fs_72 m-0">
                             {{ content.title }}
                         </h2> 
                     {% endif %}
+                    -->
                 </div> 
                 <div class="cs_height_70 cs_height_lg_50"></div> 
             </div> 
@@ -39,7 +41,7 @@
                                 
                                 {# Fall back to raw FontAwesome CSS icon class if defined instead #}
                                 {% elseif item.icon is defined and item.icon is not empty %}
-                                    <i class="{{ item.icon }} text-white cs_fs_32"></i>
+                                    <i class="{{ item.icon }} text-white cs_fs_32_icons"></i>
                                 
                                 {# Style framework asset fallback if both entries are omitted #}
                                 {% else %}

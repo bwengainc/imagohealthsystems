@@ -1,0 +1,116 @@
+{% extends '@SuluForm/themes/basic.html.twig' %}
+
+{# 1. Weka madarasa ya form tag yako ya asili #}
+{% block form_start %}
+    {% set attr = attr|merge({ class: 'cs_appointment_form clearfix' }) %}
+    {{ parent() }}
+{% endblock %}
+
+{# 2. Toa wrapper ya mzizi ili gridi ya Bootstrap (row) ifanye kazi vizuri #}
+{% block form_widget_compound %}
+    {% if form is rootform %}
+        <div class="row">
+            {{ block('form_rows') }}
+            {{ form_rest(form) }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{# 3. Geuza muundo wa kila uwanja (Row) ukae kwenye gridi ya col-lg-6 au col-lg-12 #}
+{% block form_row %}
+    {% set block_types = form.vars.block_prefixes %}
+    {% set field_name = form.vars.name|lower %}
+    {% set field_label = form.vars.label|default('')|lower|trans %}
+    
+    {# Angalia kama shamba ni Textarea, Date, au kama ulichagua 'Full' kule Sulu Admin, au ni Medical Record Number #}
+    {% set is_full_width = form.vars.attr.width|default('') == 'full' %}
+    
+    {# FIXED: Tumeongeza 'date' kwenye block_types ili kulazimisha dropdowns tatu zichukue row nzima ya col-lg-12 #}
+    {% set is_large = 'textarea' in block_types or 'date' in block_types or is_full_width or 'record' in field_name or 'record' in field_label %}
+    
+    <div class="col-lg-{{ is_large ? '12' : '6' }}">
+        {% if label is not same as(false) %}
+            <label class="cs_input_label cs_heading_color">{{ label|trans }}</label>
+        {% endif %}
+        
+        {{ form_widget(form) }}
+        
+        <div class="cs_height_42 cs_height_xl_25"></div>
+    </div>
+{% endblock %}
+
+{# 4. IMEINGIZWA HAPA: Hii block inakamata shamba la Date pindi likiwa sio single text na kuzipanga dropdowns zako tatu #}
+{% block date_widget %}
+    {% if widget == 'single_text' %}
+        <div class="cs_with_icon_input">
+            <input type="text" id="datepicker" name="{{ form.vars.full_name }}" class="cs_form_field" placeholder="August 24, 2023" value="{{ value is iterable ? '' : value }}">
+            <i class="fa-solid fa-calendar-days"></i>
+        </div>
+    {% else %}
+        {# Hapa tunazipanga zile dropdowns tatu za Month, Day, Year kwenye gridi yako ya asili ya CSS #}
+        <div class="cs_date_dropdown_wrapper" id="{{ id }}">
+            <div class="row g-2">
+                <div class="col-4">
+                    {{ form_widget(form.month, {'attr': {'class': 'cs_select'}}) }}
+                </div>
+                <div class="col-4">
+                    {{ form_widget(form.day, {'attr': {'class': 'cs_select'}}) }}
+                </div>
+                <div class="col-4">
+                    {{ form_widget(form.year, {'attr': {'class': 'cs_select'}}) }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{# 5. Rekebisha muonekano wa Text Inputs zote (Name, Phone, Date kama ikiwa bado ni simple text, nk.) #}
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    
+    {# FIXED: Tunatumia form.vars.label au name kwa usalama ili kuzuia kosa la uwanja tupu #}
+    {% set field_name = form.vars.name|lower %}
+    {% set field_label = form.vars.label|default('')|lower %}
+    
+    {# Chagua placeholder sahihi kulingana na jina la uwanja ulioweka Sulu Admin #}
+    {% set placeholder_text = attr.placeholder|default(
+        'phone' in field_name or 'phone' in field_label ? '(123) 456 - 789' :
+        ('record' in field_name or 'record' in field_label ? '123456-7890-0987' :
+        ('date' in field_name or 'date' in field_label ? 'August 24, 2023' :
+        ('time' in field_name or 'time' in field_label ? '10:00AM' : 'David John')))
+    ) %}
+
+    {# Ukaguzi wa Icons: Kama ni shamba la Tarehe au Muda, fungia kwenye div yenye icon ya asili #}
+    {% if 'date' in field_name or 'date' in field_label %}
+        <div class="cs_with_icon_input">
+            <input type="text" id="datepicker" name="{{ form.vars.full_name }}" class="cs_form_field" placeholder="August 24, 2023" value="{{ value is iterable ? '' : value }}">
+            <i class="fa-solid fa-calendar-days"></i>
+        </div>
+    {% else %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} class="cs_form_field" placeholder="{{ placeholder_text|trans }}" value="{{ value is iterable ? '' : value }}">
+    {% endif %}
+{% endblock %}
+
+{# 6. Rekebisha muonekano wa Dropdowns (Select Fields - Reason for visit & Department) #}
+{% block choice_widget_collapsed %}
+    <select {{ block('widget_attributes') }} class="cs_select" data-placeholder="{{ placeholder|default(label)|trans }}">
+        {% if placeholder is not none %}
+            <option value="">{{ placeholder|trans }}</option>
+        {% endif %}
+        {% for choice in choices %}
+            <option value="{{ choice.value }}" {% if choice.value == value or choice.value in preferred_choices %}selected="selected"{% endif %}>{{ choice.label|trans }}</option>
+        {% endfor %}
+    </select>
+{% endblock %}
+
+{# 7. Weka Button yako halisi ya Submit yenye mishale ya picha #}
+{% block button_widget %}
+    <div class="col-lg-12">
+        <div class="cs_height_18"></div>
+        <button type="{{ type|default('submit') }}" {{ block('button_attributes') }} class="cs_btn cs_style_1">
+            <span>{{ label|default('Submit')|trans }}</span>
+        </button>
+    </div>
+{% endblock %}

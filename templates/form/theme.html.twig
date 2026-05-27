@@ -1,0 +1,89 @@
+{% extends '@SuluForm/themes/basic.html.twig' %}
+
+{# 1. Weka madarasa ya form tag yako ya asili #}
+{% block form_start %}
+    {% set attr = attr|merge({ class: 'cs_contact_form cs_style_1 cs_white_bg cs_radius_30' }) %}
+    {{ parent() }}
+{% endblock %}
+
+{# 2. Toa wrapper ya mzizi ili gridi ya Bootstrap (row) ifanye kazi vizuri #}
+{% block form_widget_compound %}
+    {% if form is rootform %}
+        <div class="row">
+            {{ block('form_rows') }}
+            {{ form_rest(form) }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{# 3. Geuza muundo wa kila uwanja (Row) ukae kwenye gridi yako #}
+{% block form_row %}
+    {# FIXED: Swapped 'is containing' for the correct Twig 'in' syntax #}
+    {% set is_textarea = 'textarea' in form.vars.block_prefixes %}
+    {% set field_name = form.vars.name|lower %}
+    
+    {# UKAGUZI MPYA: Angalia kama ulichagua 'Full' kule Sulu Admin Width setting #}
+    {% set is_full_width = form.vars.attr.width|default('') == 'full' %}
+    
+    {# Inakagua kama ni subject kwa jina, au kama umelazimisha iwe 'Full' kule admin panel #}
+    {% set is_subject = 'subject' in field_name or 'ujumbe' in field_name or 'message' in field_name or is_full_width %}
+    
+    {% set is_large = is_textarea or is_subject %}
+    
+    <div class="col-lg-{{ is_large ? '12' : '6' }}">
+        {% if label is not same as(false) %}
+            <label class="cs_input_label cs_heading_color">{{ label|trans }}</label>
+        {% endif %}
+        
+        {# Inaleta widget ya input au textarea husika #}
+        {{ form_widget(form) }}
+        
+        {# Nafasi ya chini (spacing) kutoka kwenye HTML yako ya asili #}
+        <div class="cs_height_42 cs_height_xl_25"></div>
+    </div>
+{% endblock %}
+
+
+{# 4. Rekebisha muonekano wa Text Inputs zote (Name, Email, Subject, nk.) #}
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    {# FIXED: Swapped 'is containing' for the correct Twig 'in' syntax #}
+    {% set placeholder_text = attr.placeholder|default(
+        'email' in form.vars.name|lower ? 'example@gmail.com' : 
+        ('subject' in form.vars.name|lower ? 'Your subject' : 'David John')
+    ) %}
+    
+    <input type="{{ type }}"
+           {{ block('widget_attributes') }}
+           class="cs_form_field"
+           placeholder="{{ placeholder_text|trans }}"
+           value="{{ value }}">
+{% endblock %}
+
+{# 5. Rekebisha muonekano wa Textarea (Message) #}
+{% block textarea_widget %}
+    <textarea {{ block('widget_attributes') }}
+              cols="30"
+              rows="10"
+              class="cs_form_field"
+              placeholder="{{ attr.placeholder|default('Write something...')|trans }}">{{ value }}</textarea>
+{% endblock %}
+
+{# 6. Weka Button yako halisi ya Submit yenye mishale ya picha #}
+{% block button_widget %}
+    <div class="col-lg-12">
+        <div class="cs_height_18"></div>
+        <button type="{{ type|default('submit') }}"
+                {{ block('button_attributes') }}
+                class="cs_btn cs_style_1">
+            <span>{{ label|default('Submit')|trans }}</span>
+            <!--<i>
+                <img src="{{ asset('assets/img/icons/arrow_white.svg') }}" alt="Icon">
+                <img src="{{ asset('assets/img/icons/arrow_white.svg') }}" alt="Icon">
+            </i>
+            -->
+        </button>
+    </div>
+{% endblock %}
