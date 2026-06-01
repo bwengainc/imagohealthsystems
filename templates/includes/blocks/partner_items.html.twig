@@ -1,0 +1,42 @@
+<div class="cs_newsletter_2_wrap">
+  <div class="container">
+    <div class="cs_newsletter cs_style_2">
+      <div class="cs_newsletter_in">
+        <p class="cs_newsletter_subtitle cs_accent_color m-0 cs_fs_24">
+          {% if content.subtitle is defined and content.subtitle is not empty %}
+            {{ content.subtitle }}
+          {% else %}
+            Enter your details below, and our support team will contact you
+          {% endif %}
+        </p>
+        <div class="cs_height_6"></div>
+        <h2 class="cs_newsletter_title cs_fs_72">
+          {% if content.title is defined and content.title is not empty %}
+            {{ content.title }}
+          {% else %}
+            Partner With Us
+          {% endif %}
+        </h2>
+
+        <div class="row">
+          <div class="contact-form">
+            {# Safe check implemented here to prevent sequence/mapping errors #}
+            {% if content.partner_form is defined and content.partner_form is not empty and content.partner_form.vars is defined %}
+                {% if app.request.get('send') != 'true' %}
+                    {% form_theme content.partner_form 'form/partner_theme.html.twig' %}
+                    {{ form(content.partner_form) }}
+                {% else %}
+                    <div id="success">
+                        <div role="alert" class="alert alert-success">
+                            {{ view.form.entity.successText|raw }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

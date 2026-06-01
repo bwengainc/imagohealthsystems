@@ -11,6 +11,7 @@
         <!-- See: http://docs.sulu.io/en/latest/book/localization.html how to add new localizations -->
         <localization language="en" default="true"/>
         <localization language="fr"/>
+        <!--<localization language="sw"/>-->
     </localizations>
 
     <default-templates>

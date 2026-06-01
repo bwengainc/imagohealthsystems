@@ -1,90 +1,111 @@
-<!-- Start Blog Section --> 
+<!-- Start Blog Section -->
 <section>
-    <div class="cs_height_190 cs_height_xl_145 cs_height_lg_105"></div>
-    <div class="container">
-        
-        <!-- Section Heading Area -->
-        <div class="cs_section_heading cs_style_1 text-center">
-            <h3 class="cs_section_subtitle text-uppercase cs_accent_color cs_semibold m-0 cs_accent_color cs_fs_32">
-                {% trans %}BLOG POSTS{% endtrans %}
-            </h3>
-            <div class="cs_height_5"></div>
-            <h2 class="cs_section_title cs_fs_72 m-0">
-                {% trans %}Latest Update{% endtrans %}
-            </h2>
-        </div>
-        
-        <div class="cs_height_72 cs_height_lg_50"></div>
-        
-        <!-- Dynamic Blog Card Grid -->
-        <div class="row gy-4">
-            {% if content.newslist is defined and content.newslist is not empty %}
-                {# 💡 Loop through your registered Manuxi bundle collection, skipping announcements #}
-                {% for news in content.newslist|filter(n => n.type != 'announcement') %}
-                    
-                    <div class="col-lg-4 col-md-6">
-                        <div class="cs_post cs_style_1">
-                            
-                            {# Thumbnail Resolution Module #}
-                            {% if news.image %}
-                                {% set image = sulu_resolve_media(news.image.id, app.request.locale) %}
-                                {% set imageSrc = image.formats['529x379'] is defined and image.formats['529x379'] is not empty 
-                                ? image.formats['529x379'] 
-                                : image.url %}
-                            {% else %}
-                                {# Fallback image asset path if the user left the image empty inside the dashboard #}
-                                {% set imageSrc = asset('assets/img/home_1/post_1.jpeg') %}
-                            {% endif %}
-                            
-                            <a href="{{ news.routePath }}" class="cs_post_thumb cs_view_mouse">
-                                <img src="{{ imageSrc }}" title="{{ news.title }}" alt="{{ news.title }}">
-                            </a>
-
-                        
-                            
-                            <!-- Post Information Details Container -->
-                            <div class="cs_post_info">
-                                <div>
-                                    <div class="cs_post_meta">
-                                        {# Formats publication date cleanly matching browser locale settings #}
-                                        <div class="cs_posted_by">
-                                            {{ news.publishedAt|default(news.created)|date('M d, Y') }}
-                                        </div>
-                                        
-                                        <!-- Shared Target Post Links Components Area -->
-                                        <div class="cs_post_social">
-                                            <a href="https://linkedin.com{{ app.request.schemeAndHttpHost ~ news.routePath }}" target="_blank" class="cs_center rounded-circle"><i class="fa-brands fa-linkedin-in"></i></a>
-                                            <a href="https://facebook.com{{ app.request.schemeAndHttpHost ~ news.routePath }}" target="_blank" class="cs_center rounded-circle"><i class="fa-brands fa-facebook-f"></i></a>
-                                            <a href="https://twitter.com{{ app.request.schemeAndHttpHost ~ news.routePath }}" target="_blank" class="cs_center rounded-circle"><i class="fa-brands fa-twitter"></i></a>
-                                        </div>
-                                    </div>
-                                    
-                                    <h2 class="cs_post_title cs_semibold cs_fs_32">
-                                        <a href="{{ news.routePath }}">{{ news.title }}</a>
-                                    </h2>
-                                    
-                                    {% if news.subtitle %}
-                                        <p class="cs_post_subtitle" style="font-size: 16px; color: #666; margin-top: 5px;">{{ news.subtitle }}</p>
-                                    {% endif %}
-                                </div>
-                                
-                                <div class="cs_heading_color cs_medium">
-                                    <a href="{{ news.routePath }}" class="cs_post_btn">{% trans %}Learn More{% endtrans %}</a>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    
-                {% endfor %}
-            {% else %}
-                <div class="col-12 text-center text-muted">
-                    <p>{% trans %}No recent articles available at this time.{% endtrans %}</p>
-                </div>
-            {% endif %}
-        </div>
-        
+  <div class="cs_height_160 cs_height_xl_110 cs_height_lg_70"></div>
+  <div class="container">
+    
+    <!-- Section Heading Area -->
+    <div class="cs_section_heading cs_style_1">
+      <div class="cs_height_5"></div>
+      <h2 class="cs_section_title cs_fs_72 m-0">
+        {% trans %}Latest Updates/News{% endtrans %}
+      </h2>
     </div>
+    
+    <div class="cs_height_70 cs_height_lg_50"></div>
+    
+    <!-- Dynamic Blog Card Grid Split (1 Featured Large Left, Smaller Stack Right) -->
+    <div class="row cs_gap_y_24">
+      {% if content.newslist is defined and content.newslist is not empty %}
+        {% set filteredNews = content.newslist|filter(n => n.type != 'announcement') %}
+        
+        {% if filteredNews|length > 0 %}
+          
+          {# ================= LEFT COLUMN: FEATURED POST ================= #}
+          {% set featured = filteredNews|first %}
+          <div class="col-lg-6">
+            <div class="cs_post_pr_136">
+              <div class="cs_post cs_style_1 cs_type_2">
+                
+                {% if featured.image %}
+                  {% set featImage = sulu_resolve_media(featured.image.id, app.request.locale) %}
+                  {% set featImageSrc = featImage.formats['529x379'] is defined and featImage.formats['529x379'] is not empty 
+                    ? featImage.formats['529x379'] 
+                    : featImage.url %}
+                {% else %}
+                  {% set featImageSrc = asset('assets/img/home_3/blog_1.jpeg') %}
+                {% endif %}
+                
+                <a href="{{ featured.routePath }}" class="cs_post_thumb cs_view_mouse">
+                  <img src="{{ featImageSrc }}" title="{{ featured.title }}" alt="{{ featured.title }}">
+                </a>
+                
+                <div class="cs_post_info">
+                  <div>
+                    <h2 class="cs_post_title cs_semibold cs_fs_32">
+                      <a href="{{ featured.routePath }}">{{ featured.title }}</a>
+                    </h2>
+                    {% if featured.summary %}
+                      <p class="cs_post_subtitle" style="font-size: 16px; color: #666; margin-top: 5px;">
+                        {{ featured.summary }}
+                      </p>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="cs_post_meta">
+                    <div class="cs_posted_by">
+                      {{ featured.publishedAt|default(featured.created)|date('M d, Y') }}
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
+          {# ================= RIGHT COLUMN: SMALL POSTS STACK ================= #}
+          <div class="col-lg-6">
+            {% if filteredNews|length > 1 %}
+              {% for news in filteredNews|slice(1, filteredNews|length) %}
+                <div class="cs_post cs_style_2 cs_radius_20 overflow-hidden">
+                  
+                  {% if news.image %}
+                    {% set itemImage = sulu_resolve_media(news.image.id, app.request.locale) %}
+                    {% set itemImageSrc = itemImage.formats['529x379'] is defined and itemImage.formats['529x379'] is not empty 
+                      ? itemImage.formats['529x379'] 
+                      : itemImage.url %}
+                  {% else %}
+                    {% set itemImageSrc = asset('assets/img/home_3/blog_' ~ (loop.index + 1) ~ '.jpeg') %}
+                  {% endif %}
+                  
+                  <a href="{{ news.routePath }}" class="cs_post_thumb cs_view_mouse">
+                    <img src="{{ itemImageSrc }}" title="{{ news.title }}" alt="{{ news.title }}">
+                  </a>
+                  
+                  <div class="cs_post_info">
+                    <div>
+                      <h2 class="cs_post_title cs_semibold cs_fs_24">
+                        <a href="{{ news.routePath }}">{{ news.title }}</a>
+                      </h2>
+                      {% if news.summary %}
+                        <p class="cs_post_subtitle" style="font-size: 16px; color: #666; margin-top: 5px;">
+                          {{ news.summary }}
+                        </p>
+                      {% endif %}
+                      <div class="cs_posted_by">
+                        {{ news.publishedAt|default(news.created)|date('M d, Y') }}
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+          
+        {% endif %}
+      {% endif %}
+    </div>
+    
+  </div>
 </section>
 <!-- End Blog Section -->
-<div class="cs_height_200 cs_height_xl_150 cs_height_lg_110"></div>

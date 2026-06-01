@@ -11,6 +11,8 @@ sulu_core:
     locales:
         en: English
         fr: French
+       # sw: Swahili
     translations:
         - en
         - fr
+       # - sw

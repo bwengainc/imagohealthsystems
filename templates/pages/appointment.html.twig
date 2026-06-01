@@ -10,15 +10,16 @@
     {% set bgUrl = 'assets/img/appointments/banner_img.png' %}
 {% endif %}
   <!-- Start Banner  -->
-    <section class="cs_banner cs_style_3 cs_bg_filed" data-src="{{ bgUrl }}">
+    <!--<section class="cs_banner cs_style_3 cs_bg_filed" data-src="{{ bgUrl }}">-->
+     <section class="cs_banner cs_style_3 cs_bg_filed breadcum_bg" >
       <div class="cs_banner_img">
          {% if content.appointment_banner_image|default([])|length > 0 %}
         {% set media = content.appointment_banner_image[0] %}
         {% set optimized_url = media.formats['881x579']|default(media.url) %}
-        <img src="{{ optimized_url }}" alt="{{ content.title|default('Banner Image') }}" class="cs_main_banner_img">
+        <!--<img src="{{ optimized_url }}" alt="{{ content.title|default('Banner Image') }}" class="cs_main_banner_img">-->
     {% else %}
         {# Fallback ya picha ya asili ya static asset #}
-        <img src="{{ asset('assets/img/appointments/banner_img.png') }}" alt="Banner Image" class="cs_main_banner_img">
+        <!--<img src="{{ asset('assets/img/appointments/banner_img.png') }}" alt="Banner Image" class="cs_main_banner_img">-->
     {% endif %}
       </div>
       <div class="container">

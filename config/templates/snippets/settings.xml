@@ -39,5 +39,34 @@
                 <info_text lang="de">Die ausgewählte Organisation zur Darstellung von Kontaktinformationen auf der Webseite verwendet.</info_text>
             </meta>
         </property>
+
+         <!-- ADDED THIS SECTION FOR YOUR PARTNER FOOTER FORM MZEE -->
+        <section name="footer_partner_section">
+            <meta>
+                <title lang="en">Footer Partner Form Settings</title>
+            </meta>
+            <properties>
+                <property name="partner_title" type="text_line">
+                    <meta><title lang="en">Partner Title</title></meta>
+                </property>
+                
+                <property name="partner_subtitle" type="text_line">
+                    <meta><title lang="en">Partner Subtitle</title></meta>
+                </property>
+                
+                <property name="partner_form" type="single_form_selection">
+                <meta>
+                <title lang="de">Formular</title>
+                <title lang="en">Partner Form</title>
+            </meta>
+            <params>
+                <param name="resourceKey" value="page"/>
+            </params>
+        </property>
+
+            </properties>
+        </section>
+
+
     </properties>
 </template>

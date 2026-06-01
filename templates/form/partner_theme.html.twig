@@ -1,0 +1,74 @@
+{% extends '@SuluForm/themes/basic.html.twig' %}
+
+{# 1. Weka madarasa ya form tag yako ya asili #}
+{% block form_start %}
+    {% set attr = attr|merge({ class: 'cs_partner_form clearfix' }) %}
+    {{ parent() }}
+{% endblock %}
+
+{# 2. Toa wrapper ya mzizi ili gridi ya Bootstrap (row) ifanye kazi vizuri #}
+{% block form_widget_compound %}
+    {% if form is rootform %}
+        <div class="row">
+            {{ block('form_rows') }}
+            {{ form_rest(form) }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{# 3. Geuza muundo wa kila uwanja (Row) ukae kwenye gridi ya col-lg-6 au col-lg-12 #}
+{% block form_row %}
+    {% set block_types = form.vars.block_prefixes %}
+    {% set field_name = form.vars.name|lower %}
+    {% set field_label = form.vars.label|default('')|lower|trans %}
+    
+    {# Angalia kama shamba ni Textarea, au kama ni Mobile au Phone ambalo HTML yako inataka liwe col-lg-12 #}
+    {% set is_full_width = form.vars.attr.width|default('') == 'full' %}
+    
+    {# FIXED: Simu/Mobile hapa inachukua col-lg-12 nzima kulingana na HTML yako mzee #}
+    {% set is_large = 'textarea' in block_types or 'email' not in block_types and ('phone' in field_name or 'mobile' in field_name or 'phone' in field_label or 'mobile' in field_label or is_full_width) %}
+    
+    <div class="col-lg-{{ is_large ? '12' : '6' }}">
+        {% if label is not same as(false) and label is not empty %}
+            <label class="cs_input_label cs_heading_color">{{ label|trans }}</label>
+        {% endif %}
+        
+        {{ form_widget(form) }}
+        
+        <div class="cs_height_42 cs_height_xl_25"></div>
+    </div>
+{% endblock %}
+
+{# 4. Rekebisha muonekano wa Text Inputs zote (Name, Email, Mobile No. n.k) #}
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    {% set field_name = form.vars.name|lower %}
+    {% set field_label = form.vars.label|default('')|lower %}
+    
+    {# Chagua placeholder sahihi kulingana na jina la uwanja ulioweka Sulu Admin #}
+    {% set placeholder_text = attr.placeholder|default(
+        'email' in field_name or 'email' in field_label ? 'Email' :
+        ('phone' in field_name or 'mobile' in field_name or 'phone' in field_label or 'mobile' in field_label ? 'Mobile No.' : 
+        'Name')
+    ) %}
+
+    {# Weka madarasa ya input kulingana na HTML yako ya partner footer #}
+    {% set input_class = 'cs_form_field2' %}
+    {% if 'name' in field_name or 'name' in field_label %}
+        {% set input_class = 'cs_form_field2 cs_newsletter_input' %}
+    {% endif %}
+
+    <input type="{{ type }}" {{ block('widget_attributes') }} class="{{ input_class }}" placeholder="{{ placeholder_text|trans }}" value="{{ value is iterable ? '' : value }}">
+{% endblock %}
+
+{# 5. Weka Button yako halisi ya Submit yenye darasa la cs_btn2 na muundo wako wa HTML #}
+{% block button_widget %}
+    <div class="col-lg-12">
+        <div class="cs_height_4"></div>
+        <button type="{{ type|default('submit') }}" {{ block('button_attributes') }} class="cs_btn2 cs_style_1">
+            <span>{{ label|default('Submit')|trans }}</span>
+        </button>
+    </div>
+{% endblock %}

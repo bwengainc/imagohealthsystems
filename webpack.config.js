@@ -35,6 +35,12 @@ Encore
     .addEntry('gsap', './assets/website/js/plugins/gsap.min.js')
     .addEntry('animatedheadline', './assets/website/js/plugins/animated-headline.js')
     .addEntry('main', './assets/website/js/main.js')
+
+    /*Revolution Slider*/ 
+    .addEntry('slider', './assets/website/styles/revolution/js/slider.js')
+    .addEntry('tools', './assets/website/styles/revolution/js/revolution.tools.min.js')
+    .addEntry('rs6', './assets/website/styles/revolution/js/rs6.min.js')
+
   
     
 

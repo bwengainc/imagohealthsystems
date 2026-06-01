@@ -1,0 +1,95 @@
+<!-- START REVOLUTION SLIDER (INTEGRATED WITH PROHEALTH HERO STYLES) -->
+{% if content.snippets is defined and content.snippets|length > 0 %}
+    {% set snippet_content = content.snippets[0] %}
+
+    {% if snippet_content.slider is defined and snippet_content.slider|length > 0 %}
+        <rs-module-wrap id="rev_slider_4_1_wrapper" data-source="gallery">
+            <rs-module id="rev_slider_4_1" data-version="6.3.3">
+                <rs-slides>
+                    {% for slider_item in snippet_content.slider %}
+                        
+                        {# 1. Tunasoma picha ya background kwa kila slide kwa kutumia muundo wako #}
+                        {% set bgImageUrl = '' %}
+                        {% if slider_item.slider_image[0] is defined %}
+                            {% set bgMedia = slider_item.slider_image[0] %}
+                            {% set bgImageUrl = bgMedia.formats['1920x1097'] ?? bgMedia.url %}
+                        {% else %}
+                            {% set bgImageUrl = asset('assets/img/home_1/hero_bg.jpeg') %}
+                        {% endif %}
+
+                        {# 2. Kusoma data na link za kuelekeza kurasa #}
+                        {% set sliderUrl = slider_item.slider_url ?? (slider_item.slider_link[0].url ?? '#') %}
+                        {% set headline = slider_item.slider_headline ?? 'High Quality<br />Optometrist<br />Eye Clinic' %}
+                        {% set subline = slider_item.slider_small ?? 'We believe eye care should be attainable and that is <br>reflected in the way we partner primary eye care.' %}
+                        {% set buttonText = slider_item.slider_button ?? 'Meet Our Doctors' %}
+
+                        <rs-slide data-key="rs-{{ loop.index }}" data-title="Slide" data-thumb="{{ bgImageUrl }}" data-anim="ei:d;eo:d;s:d;r:0;t:fade;sl:d;">
+                            
+                            {# Picha ya asili ya Revolution Slider Background layer #}
+                            <img src="{{ bgImageUrl }}" alt="slide-img" title="mainslider-bg{{ loop.index }}" width="1920" height="1097" class="rev-slidebg" data-no-retina>
+
+                            <!-- SULU HERO ADAPTATION LAYER -->
+                            <rs-layer
+                                id="slider-1-slide-{{ loop.index }}-layer-hero-block"
+                                data-type="html"
+                                data-rsp_ch="on"
+                                data-xy="x:l;y:t;"
+                                data-text="w:normal;"
+                                data-frame_0="o:0;"
+                                data-frame_1="st:100;sp:500;"
+                                data-frame_999="o:0;st:w;"
+                                style="z-index:10; width:100%; height:100%;"
+                            >
+                                {# FIXED STRUCTURE: Removed duplicate wrapper elements #}
+                                <section class="cs_hero cs_style_1">
+                                    <div class="cs_hero_wrap">
+                                        <div class="container">
+                                            <div class="cs_hero_text">
+                                                
+                                                {# FIXED INLINE STYLE: white-space: normal forces the layout engine to honor <br> tags #}
+                                                <h1 class="cs_hero_title cs_fs_72">
+                                                    {{ headline|raw }}
+                                                </h1>
+                                                
+                                                {# Subline #}
+                                                <p class="cs_hero_subtitle cs_fs_20 cs_heading_color">
+                                                    {{ subline|raw }}
+                                                </p>
+                                                
+                                                {# Video Wrap / Button Target Layout #}
+                                                <div class="cs_hero_btn_wrap">
+                                                    <a href="{{ sliderUrl }}" class="cs_video_open cs_heading_color cs_text_btn_2 cs_fs_20">
+                                                        <!--<span class="cs_text_btn_icon">
+                                                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://w3.org">
+                                                                <path d="M42.739 7.26089C32.8938 -2.48797 17.0097 -2.40994 7.26088 7.43526C-2.42029 17.2121 -2.42029 32.9623 7.26088 42.7392C17.1061 52.488 32.9902 52.41 42.739 42.5648C52.4202 32.788 52.4202 17.0377 42.739 7.26089ZM25 48.0713C12.2783 48.0713 1.92868 37.7217 1.92868 25C1.92868 12.2782 12.2782 1.9288 25 1.9288C37.7217 1.9288 48.0712 12.2784 48.0712 25.0001C48.0712 37.7218 37.7216 48.0713 25 48.0713Z" fill="currentColor"/>
+                                                                <path d="M38.5996 24.1265V24.1277L18.2308 12.368C17.7487 12.0897 17.1322 12.2548 16.8539 12.737C16.7655 12.8901 16.7189 13.0637 16.7189 13.2405V36.7598C16.7191 37.3164 17.1707 37.7676 17.7273 37.7672C17.9041 37.7671 18.0778 37.7206 18.2309 37.6322L38.5997 25.8725C39.0819 25.5943 39.2471 24.9778 38.9689 24.4956C38.8803 24.3423 38.753 24.215 38.5996 24.1265Z" fill="currentColor"/>
+                                                            </svg>
+                                                        </span>
+                                                        <span class="cs_text_btn_text">
+                                                            {{ buttonText }}
+                                                        </span>-->
+                                                    </a>
+            <div class="cs_hero_info_col">
+              <a href="{{ sliderUrl }}" class="cs_btn cs_style_1">
+                <span> {{ buttonText }}</span>
+                
+              </a>
+            </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </rs-layer>
+
+                        </rs-slide>
+                    {% endfor %}
+                </rs-slides>
+            </rs-module>
+        </rs-module-wrap>
+    {% endif %}
+{% endif %}
+<!-- END REVOLUTION SLIDER -->

@@ -1,0 +1,43 @@
+<properties xmlns="http://schemas.sulu.io/template/template"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+<block name="blocks" default-type="partner_items">
+        <meta>
+            <title lang="en">Partner Footer Block</title>
+        </meta>
+
+        <types>
+        <type name="partner_items">
+                <meta>
+                    <title lang="en">Partner Footer Area Section</title>
+                </meta>
+
+    <properties>
+        <property name="subtitle" type="text_line">
+            <meta>
+                <title lang="en">Subtitle</title>
+            </meta>
+        </property>
+        <property name="title" type="text_line">
+            <meta>
+                <title lang="en">Title</title>
+            </meta>
+        </property>
+
+        <property name="partner_form" type="single_form_selection">
+            <meta>
+                <title lang="de">Formular</title>
+                <title lang="en">Partner Form</title>
+            </meta>
+            <params>
+                <param name="resourceKey" value="page"/>
+            </params>
+        </property>
+
+    </properties>
+    </type>
+
+        </types>
+</block>
+</properties>

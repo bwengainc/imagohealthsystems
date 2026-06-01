@@ -53,13 +53,13 @@
         <div class="cs_date_dropdown_wrapper" id="{{ id }}">
             <div class="row g-2">
                 <div class="col-4">
-                    {{ form_widget(form.month, {'attr': {'class': 'cs_select'}}) }}
+                    {{ form_widget(form.month, {'attr': {'class': 'cs_select2'}}) }}
                 </div>
                 <div class="col-4">
-                    {{ form_widget(form.day, {'attr': {'class': 'cs_select'}}) }}
+                    {{ form_widget(form.day, {'attr': {'class': 'cs_select2'}}) }}
                 </div>
                 <div class="col-4">
-                    {{ form_widget(form.year, {'attr': {'class': 'cs_select'}}) }}
+                    {{ form_widget(form.year, {'attr': {'class': 'cs_select2'}}) }}
                 </div>
             </div>
         </div>
@@ -85,17 +85,17 @@
     {# Ukaguzi wa Icons: Kama ni shamba la Tarehe au Muda, fungia kwenye div yenye icon ya asili #}
     {% if 'date' in field_name or 'date' in field_label %}
         <div class="cs_with_icon_input">
-            <input type="text" id="datepicker" name="{{ form.vars.full_name }}" class="cs_form_field" placeholder="August 24, 2023" value="{{ value is iterable ? '' : value }}">
+            <input type="text" id="datepicker" name="{{ form.vars.full_name }}" class="cs_form_field2" placeholder="August 24, 2023" value="{{ value is iterable ? '' : value }}">
             <i class="fa-solid fa-calendar-days"></i>
         </div>
     {% else %}
-        <input type="{{ type }}" {{ block('widget_attributes') }} class="cs_form_field" placeholder="{{ placeholder_text|trans }}" value="{{ value is iterable ? '' : value }}">
+        <input type="{{ type }}" {{ block('widget_attributes') }} class="cs_form_field2" placeholder="{{ placeholder_text|trans }}" value="{{ value is iterable ? '' : value }}">
     {% endif %}
 {% endblock %}
 
 {# 6. Rekebisha muonekano wa Dropdowns (Select Fields - Reason for visit & Department) #}
 {% block choice_widget_collapsed %}
-    <select {{ block('widget_attributes') }} class="cs_select" data-placeholder="{{ placeholder|default(label)|trans }}">
+    <select {{ block('widget_attributes') }} class="cs_select2" data-placeholder="{{ placeholder|default(label)|trans }}">
         {% if placeholder is not none %}
             <option value="">{{ placeholder|trans }}</option>
         {% endif %}

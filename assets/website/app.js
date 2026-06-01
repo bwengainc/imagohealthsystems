@@ -16,5 +16,10 @@ import './styles/plugins/jquery.timepicker.min.css';
 import './styles/plugins/jquery-ui.css';
 import './styles/plugins/select2.min.css';
 import './styles/plugins/animated-headline.css';
+//REVOLUTION LAYERS STYLES
+import './styles/revolution/css/rs6.css';
+
 import './styles/style.css';
 import './styles/app.css';
+
+

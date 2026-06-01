@@ -1,10 +1,10 @@
 /* 1. Force the normal arrow cursor back on the entire webpage */
-html, body {
+/*html, body {
     cursor: default !important;
-}
+}*/
 
 /* 2. Force the standard clickable HAND cursor on all interactive elements */
-a, 
+/*a, 
 button, 
 select, 
 input[type="submit"], 
@@ -12,10 +12,10 @@ input[type="button"],
 .btn,
 [role="button"] {
     cursor: pointer !important;
-}
+}*/
 
 /* 3. Keep the annoying custom tracking shapes completely hidden */
-.cursor, 
+/*.cursor, 
 .cs_cursor_lg, 
 .cs_cursor_sm,
 .cs-cursor_1,
@@ -24,7 +24,8 @@ input[type="button"],
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
-}
+}*/
+
 
 /* Language selector */ 
 .language-switcher .locale-list { 
@@ -356,3 +357,243 @@ a:hover {
 }
 
 
+/* Override Revolution Slider layer text rules */
+.rs-layer h1,
+.cs_hero_title {
+    white-space: pre-line !important;   /* heshimu <br> na newlines */
+    word-break: normal !important;      /* usivunje kila neno */
+    overflow-wrap: normal !important;   /* ruhusu breaks tu pale <br> ipo */
+    display: block !important;          /* acha iwe block ya text */
+    line-height: 1.2 !important;        /* spacing nzuri ya mistari */
+}
+
+/* Force show video button inside hero section */
+.cs_hero_btn_wrap .cs_video_open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline-flex !important;   /* au block kulingana na layout yako */
+    position: relative !important;     /* override absolute positioning ya rs6.css */
+    z-index: 999 !important;           /* hakikisha iko juu ya background layers */
+    align-items: center;
+    gap: 10px;                         /* spacing kidogo kati ya icon na text */
+}
+
+/*revolution */
+
+
+.rev-slidebg::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0,0,0,0.5), 
+        rgba(0,0,0,0.3)
+    );
+    z-index: 1;
+}
+
+
+.cs_hero_title {
+    color: #fff !important;          /* maandishi meupe */
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6); /* kivuli ili yaonekane */
+    font-weight: 700;
+}
+
+.cs_hero_subtitle {
+    color: #f0f0f0 !important;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+/* Fade effect kwa background images */
+.rev-slidebg {
+    opacity: 0.6;              /* picha inakuwa kidogo faded */
+    filter: brightness(0.8);   /* inafanya iwe darker kidogo */
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Hover effect (optional) */
+.rev-slidebg:hover {
+    opacity: 0.8;
+    filter: brightness(1);
+}
+
+/* Hover effect */
+.cs_btn.cs_style_1:hover {
+    background: #CFAC62 !important;       /* dark shade ya blue */
+    color: #051935 !important;
+    transform: translateY(-3px); /* kidogo inainuka juu */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+ /* Base arrow style */
+#rev_slider_4_1_wrapper .uranus.tparrows::before {
+  background-color: #051935 !important;
+}
+
+/* Hover effect */
+#rev_slider_4_1_wrapper .uranus.tparrows:hover::before {
+  background-color: #CFAC62 !important;
+  transform: scale(1.1);
+}
+
+/* Left arrow icon */
+.tparrows.tp-leftarrow::before {
+  content: '\e824' !important;
+}
+
+/* Right arrow icon */
+.tparrows.tp-rightarrow::before {
+  content: '\e825' !important;
+}
+
+/* Ensure arrows are visible */
+.tparrows.tp-leftarrow,
+.tparrows.tp-rightarrow {
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 1000;
+}
+
+
+.services_bg{ background:#051935;}
+
+.cs_tabs.cs_style1 .cs_tab_links li:before {
+    background-color: #051935 !important;
+}
+
+.cs_tabs.cs_style1 .cs_tab_links {
+    border-right: 1px solid #051935 !important;
+}
+
+.cs_about_content p{
+  color: #F8F9FB !important;
+}
+
+a:hover {
+  color: #d0ac62 !important;
+}
+
+
+.cs_form_field2, .cs_select2 {
+  display: block;
+  width: 100%;
+  border-radius: 30px;
+  outline: none;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(39, 71, 96, 0.5);
+  padding: 16px 22px;
+  background-color: transparent;
+}
+
+
+.cs_form_field
+{
+  padding: 16px 22px !important;
+}
+
+.cs_btn2.cs_style_1 {
+  border-radius: 24px;
+  -webkit-box-shadow: 0px 4px 20px 0px rgba(39, 71, 96, 0.17);
+          box-shadow: 0px 4px 20px 0px rgba(39, 71, 96, 0.17);
+  font-weight: 500;
+  color: #051935;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 8px;
+  padding: 12px 40px;
+  outline: none;
+  border: none;
+  position: relative;
+  background: transparent;
+}
+
+
+.cs_newsletter.cs_style_2 {
+    background: linear-gradient(154deg, #cfac62, #d0ac62);
+    border-radius: 20px;
+    -webkit-box-shadow: 6px 4px 70px 8px rgba(207, 172, 98, .25);
+    box-shadow: 6px 4px 70px 8px rgba(207, 172, 98, .25);
+    margin-top: 240px;
+    position: relative;
+    z-index: 2;
+}
+
+
+.breadcum_bg{ 
+  background:#051935 !important;
+  color:#F8F9FB !important;
+}
+
+.breadcum_bg p,
+.breadcum_bg h1,
+.breadcum_bg h2,
+.breadcum_bg h3,
+.breadcum_bg h4,
+.breadcum_bg h5,
+.breadcum_bg h6 {
+  color: #F8F9FB !important;
+}
+
+
+
+.select2-container--default .select2-selection--single {
+  border-color: #051935 !important;
+}
+
+.select2-dropdown {
+ border-color: #051935 !important;
+}
+
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  color: #051935 !important;
+}
+
+@media (max-width: 1700px) {
+  .select2-container .select2-selection--single .select2-selection__rendered {
+  }
+}
+
+
+
+.cs_isotop_filter.cs_style1 ul .active a {
+    background-color: #d0ac62 !important;;
+    color: #fff;
+}
+.cs_isotop_filter.cs_style1 ul a {
+    border: 1px solid #d0ac62 !important;;
+    color: #051935 !important;
+}
+
+.w-60 {
+    width: 60% !important;
+}
+
+
+.cursor {
+  color: #CFAC62 !important;
+}
+
+.cs_cursor_sm {
+  background-color: #CFAC62 !important;
+}
+
+
+.cs_list.cs_style_1 ul li:before {
+    background-color: #CFAC62 !important;
+}
+
+.cs_list.cs_style_3 ul li span i {
+    color: #CFAC62 !important;
+}

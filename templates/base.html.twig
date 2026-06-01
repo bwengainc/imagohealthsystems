@@ -21,6 +21,9 @@
     {% block style %}
       {{ encore_entry_link_tags('app') }}
     {% endblock %}
+
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/icons/logo-icon.svg') }}">
+    
 </head>
 <body>
     <!-- Start Preloader -->
@@ -39,7 +42,7 @@
 
         {% block header %}
         <!-- Start Header Section -->
-    <header class="cs_site_header cs_style1 cs_sticky_header cs_heading_color cs_gescout_sticky">
+    <header class="cs_site_header cs_style1 cs_sticky_header cs_heading_color cs_gescout_sticky cs_gescout_show">
     <!--<header class="cs_site_header cs_style1 cs_sticky_header cs_white_color cs_gescout_sticky cs_gescout_show">-->
       <div class="cs_main_header">
         <div class="container">
@@ -126,30 +129,58 @@
     </main>
 
 
-    <div class="cs_height_200 cs_height_xl_150 cs_height_lg_110"></div>
+    
         {% block footer %}
     <!-- Start Footer Section -->
     <footer class="cs_footer cs_style_2 cs_type_1 cs_accent_bg cs_white_color">
+         {# 1. FETCH THE GLOBAL SETTINGS SNIPPET BOUND TO THE AREA #}
+         {% set settingsSnippet = sulu_snippet_load_by_area('webspace_settings')|default(null) %}
+
+         {# 2. RENDER THE PARTNER SECTION ONLY IF SNIPPET EXISTS #}
+         {% if settingsSnippet %}
+         <div class="cs_newsletter_2_wrap">
+             <div class="container">
+                 <div class="cs_newsletter cs_style_2">
+                     <div class="cs_newsletter_in">
+                         <p class="cs_newsletter_subtitle cs_accent_color m-0 cs_fs_24">
+                             {% if settingsSnippet.content.partner_subtitle is defined and settingsSnippet.content.partner_subtitle is not empty %}
+                                 {{ settingsSnippet.content.partner_subtitle }}
+                             {% else %}
+                                 Enter your details below, and our support team will contact you
+                             {% endif %}
+                         </p>
+                         <div class="cs_height_6"></div>
+                         <h2 class="cs_newsletter_title cs_fs_72">
+                             {% if settingsSnippet.content.partner_title is defined and settingsSnippet.content.partner_title is not empty %}
+                                 {{ settingsSnippet.content.partner_title }}
+                             {% else %}
+                                 Partner With Us
+                             {% endif %}
+                         </h2>
+                         <div class="row">
+                             <div class="contact-form">
+                                 {# Read form view object directly from the snippet properties #}
+                                 {% if settingsSnippet.content.partner_form is defined and settingsSnippet.content.partner_form is not empty and settingsSnippet.content.partner_form.vars is defined %}
+                                     {% if app.request.get('send') != 'true' %}
+                                         {% form_theme settingsSnippet.content.partner_form 'form/partner_theme.html.twig' %}
+                                         {{ form(settingsSnippet.content.partner_form) }}
+                                     {% else %}
+                                         <div id="success">
+                                             <div role="alert" class="alert alert-success">
+                                                 {{ view.form.entity.successText|raw }}
+                                             </div>
+                                         </div>
+                                     {% endif %}
+                                 {% endif %}
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         {% endif %}
       <div class="container">
-        <!--<div class="cs_newsletter cs_style_3">
-          <div class="cs_newsletter_left">
-            <h2 class="cs_newsletter_title cs_white_color">Be Our Subscribers</h2>
-            <p class="cs_newsletter_subtitle mb-0">Join our newsletter to keep up to date <br>health from our experts </p>
-          </div>
-          <div class="cs_newsletter_right">
-            <p>Your Email</p>
-            <form action="#" class="cs_newsletter_form">
-              <input type="text" class="cs_form_field" placeholder="example@email.com">
-              <button class="cs_btn cs_style_1">
-                <span>Submit</span>
-                <i>
-                  <img src="assets/img/icons/right_arrow_blue.svg" alt="Icon">
-                  <img src="assets/img/icons/right_arrow_blue.svg" alt="Icon">
-                </i>
-              </button>
-            </form>
-          </div>
-        </div>-->
+      
         <div class="cs_footer_in">
           <div class="cs_footer_col">
             <div class="cs_footer_item">
@@ -253,7 +284,7 @@
         <div class="container">
           <div class="cs_copyright">
           <p><span  style="color:#F8F9FB !important;">{% trans %}Copyright{% endtrans %} © {{ 'now'|date('Y') }} {{ account.name }} </span><span>{% trans %}All Rights Reserved {% endtrans %}</span>
-          {% trans %}Managed by{% endtrans %} <a style="color:#e99323 !important;" href="https://bwengainc.net/" target="_blank">Bwenga Inc</a>
+          <!--{% trans %}Managed by{% endtrans %} <a style="color:#e99323 !important;" href="https://bwengainc.net/" target="_blank">Bwenga Inc</a>-->
           </p>                       
           </div>
         </div>
@@ -285,6 +316,13 @@
         {{ encore_entry_script_tags('main') }}
 
         {{ encore_entry_script_tags('app') }}
+
+         <!--Revolution Slider-->
+    {{ encore_entry_script_tags('slider')}}
+    {{ encore_entry_script_tags('tools')}}
+    {{ encore_entry_script_tags('rs6')}}
+
+        
 
         <script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/js/bootstrap-select.min.js') }}"></script>

@@ -64,6 +64,9 @@
                     </meta>
 
                     <types>
+
+                    <xi:include href="../includes/blocks/slider.xml"
+                                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:block/sulu:types/sulu:type)"/>       
                     
                     <xi:include href="../includes/blocks/hero.xml"
                                     xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:block/sulu:types/sulu:type)"/>
@@ -74,11 +77,16 @@
                     <xi:include href="../includes/blocks/faq.xml"
                                     xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:block/sulu:types/sulu:type)"/>
 
+                    <xi:include href="../includes/blocks/brand_story.xml"
+                                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:block/sulu:types/sulu:type)"/>
+
+
                     <xi:include href="../includes/blocks/testimonials.xml"
                                     xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:block/sulu:types/sulu:type)"/>
                                          
                      <xi:include href="../includes/blocks/newslist.xml"
                                     xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:block/sulu:types/sulu:type)"/>
+
                            
                     </types>
                     

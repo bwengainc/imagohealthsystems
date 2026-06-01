@@ -1,151 +1,100 @@
-
- <div class="cs_height_200 cs_height_xl_150 cs_height_lg_110"></div>
-
-<!-- Start Testimonial Section -->
-<section class="cs_bg_filed" data-src="{{ asset('http://imagohealthsystems.local/uploads/media/1626x760/09/29-banner_bg_2.png?v=1-0') }}">
-  <div class="cs_height_190 cs_height_xl_145 cs_height_lg_105"></div>
+<!-- Start Review Section -->
+<section>
+  <div class="cs_height_185 cs_height_xl_140 cs_height_lg_100"></div>
   <div class="container">
+    
+    <!-- Section Heading Mapping -->
     <div class="cs_section_heading cs_style_1">
-      <h3 class="cs_section_subtitle text-uppercase cs_accent_color cs_semibold m-0 cs_accent_color cs_fs_32">
-        {#% if content.title is defined and content.title is not empty %}{{ content.title }}{% else %}TESTIMONIALS{% endif %#}
-      </h3>
-      <div class="cs_height_5"></div>
       <h2 class="cs_section_title cs_fs_72 m-0">
-        {% if content.subtitle is defined and content.subtitle is not empty %}{{ content.subtitle|raw }}{% else %}What Our Patients Say <br>About Us{% endif %}
+        {#% if content.title is defined and content.title is not empty %}{{ content.title }}{% else %}Some Reviews{% endif %#}
+        {% if content.subtitle is defined and content.subtitle is not empty %}{{ content.subtitle|raw }}{% else %}{% trans %}What Our Patients Say{% endtrans %} <br>{% trans %}About Us{% endtrans %}{% endif %}
       </h2>
+      <div class="cs_height_5"></div>
+      <h3 class="cs_section_subtitle cs_accent_color cs_semibold m-0 cs_accent_color cs_fs_32">
+        {#% if content.subtitle is defined and content.subtitle is not empty %}{{ content.subtitle|raw }}{% else %}What Our Patients Say <br>About Us{% endif %#}
+      </h3>
     </div>
-    <div class="cs_height_70 cs_height_lg_50"></div>
-    <div class="cs_testimonial_carousel cs_gap_20 position-relative">
-      <div class="row">
-        <div class="col-lg-10 offset-lg-2">
-          <div class="cs_slider_activate">
-            
-            {# MAIN TESTIMONIAL CAROUSEL LOOP #}
-            {% if content.testimonials is defined and content.testimonials is not empty %}
-              {% for testimonial in content.testimonials %}
-                
-                {% set itemRating = testimonial.rating|default(5) + 0 %}
-                <div class="cs_slide">
-                  <div class="cs_testimonial cs_style_3 cs_radius_20 cs_white_bg text-center">
-                    <div class="cs_testimonial_img">
-                      {% if testimonial.image is defined and testimonial.image is not empty %}
-                        {% set imageId = testimonial.image.id is defined ? testimonial.image.id : testimonial.image %}
-                        {% set media = sulu_resolve_media(imageId, app.request.locale) %}
-                        <img src="{{ media.thumbnails['sulu-240x']|default(asset('assets/img/home_4/avatar_placeholder.png')) }}" alt="{{ testimonial.name|default('Avatar') }}">
-                      {% else %}
-                        {# Fallback template pattern rotating avatar files 1 and 2 to match your theme structure #}
-                        <img src="{{ asset('assets/img/home_3/testimonial_img_' ~ (loop.index is odd ? 1 : 2) ~ '.png') }}" alt="Avatar">
-                      {% endif %}
-                    </div>
-                    <h2 class="cs_testimonial_avatar cs_fs_24 cs_semibold">
-                      {{ testimonial.name|default(testimonial.title|default('ANONYMOUS'))|upper }}
-                    </h2>
-                    
-                    <!-- Dynamic Star Ratings Matrix -->
-                    <div class="cs_rating cs_accent_color_rating" data-rating="{{ itemRating }}">
-                      <div class="cs_rating_bg">
-                        {% for i in 1..5 %}
-                          <i class="fa-regular fa-star"></i>
-                        {% endfor %}
-                      </div>
-                      <div class="cs_rating_percentage">
-                        {% for i in 1..5 %}
-                          {% if i <= itemRating %}
-                            <i class="fa-solid fa-star"></i>
-                          {% endif %}
-                        {% endfor %}
-                      </div>
-                    </div>
-                    
-                    <div class="cs_testimonial_text cs_fs_20">
-                      {{ testimonial.text|default(testimonial.comment|default(''))|raw }}
-                    </div>
+
+
+    
+    
+    <div class="cs_height_72 cs_height_lg_50"></div>
+    <div class="cs_tabs cs_style1">
+      
+      {# PART 1: TAB LINK HEADERS (Loops to fetch patient profile metadata cards) #}
+      {% if content.testimonials is defined and content.testimonials is not empty %}
+        <ul class="cs_tab_links">
+          {% for testimonial in content.testimonials %}
+            {# Enforces the absolute second tab index loop execution pattern to be natively active on initial load #}
+            <li class="{{ loop.index == 2 ? 'active' : '' }}">
+              <div class="cs_tab_link_in">
+                <a href="#tab_{{ loop.index }}"></a>
+                <div class="cs_testimonial_1_avatar">
+                  
+                  {# Resolves custom media profiles safely #}
+                  {% if testimonial.image is defined and testimonial.image is not empty %}
+                    {% set imageId = testimonial.image.id is defined ? testimonial.image.id : testimonial.image %}
+                    {% set media = sulu_resolve_media(imageId, app.request.locale) %}
+                    <img src="{{ media.thumbnails['sulu-240x']|default(asset('assets/img/home_4/avatar_placeholder.png')) }}" alt="{{ testimonial.name|default('Avatar') }}">
+                  {% else %}
+                    {# Alternator fallback tracking profile image files cleanly #}
+                    <img src="{{ asset('assets/img/home_1/avatar_' ~ (loop.index <= 3 ? loop.index : 1) ~ '.png') }}" alt="Avatar">
+                  {% endif %}
+                  
+                  <div class="cs_testimonial_1_avatar_right">
+                    <h3 class="cs_fs_24 cs_semibold mb-0">
+                      {{ testimonial.name|default(testimonial.title|default('Anonymous'))|upper }}
+                    </h3>
+                    <p class="cs_heading_color mb-0">
+                      {{ testimonial.location|default(testimonial.position|default('')) }}
+                    </p>
                   </div>
                 </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
 
-              {% endfor %}
-            {% endif %}
-
-          </div>
-        </div>
-      </div>
-      <div class="cs_pagination cs_style_1"></div>
-      <div class="cs_slider_navigation cs_style_1">
-        <!--<div class="cs_slider_prev cs_center"><img src="{{ asset('assets/img/icons/left_arrow_blue.svg') }}" alt="Prev"></div>
-        <div class="cs_slider_next cs_center"><img src="{{ asset('assets/img/icons/right_arrow_blue.svg') }}" alt="Next"></div>-->
-        <div class="cs_slider_prev cs_center">
-  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
-    <path d="M15 19L8 12L15 5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</div>
-<div class="cs_slider_next cs_center">
-  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
-    <path d="M9 5L16 12L9 19" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</div>
-
-      </div>
-    </div>
-  </div>
-  <div class="cs_height_200 cs_height_xl_150 cs_height_lg_110"></div>
-  
-  <!-- Banner Wrapper Area -->
-  <!--<div class="cs_banner_8_wrap">
-    <div class="container">
-      <div class="cs_banner cs_style_8 cs_radius_25 cs_bg_filed" data-src="{{ asset('assets/img/home_3/banner_bg.svg') }}">
-        <div class="cs_banner_img"><img src="{{ asset('assets/img/home_3/banner_img.png') }}" alt="Banner"></div>
-        <div class="cs_banner_in">
-          <h2 class="cs_banner_title cs_fs_72 cs_white_color">
-            {% if content.banner_title is defined and content.banner_title is not empty %}{{ content.banner_title }}{% else %}Partners with Us!{% endif %}
-          </h2>
-          {# FIXED: Repaired the broken open tag string found at the footer of your original snippet #}
-          <p class="cs_banner_subtitle cs_white_color">
-            {% if content.banner_subtitle is defined and content.banner_subtitle is not empty %}{{ content.banner_subtitle }}{% else %}Schedule an assessment with our specialized clinical groups today.{% endif %}
-          </p>
-        </div>
-      </div>
-    </div>-->
-  </div>
-  <div class="container cs_mt_minus_110">
-        <div class="row">
-        <div class="cs_section_heading cs_style_1 text-center">
-         <!-- <h3 class="cs_section_subtitle text-uppercase cs_accent_color cs_semibold m-0 cs_accent_color cs_fs_32">
-          </h3>-->
-          <p style="color:#fff; font-size:26px; font-weight:900;">Whether you’re an investor, NGO, government, or individual donor, there’s a way for you to join our mission</p>
-          <div class="cs_height_5"></div>
-          <h2 class="cs_section_title cs_fs_72 m-0" style="color:#CFAC62 !important;">Partner With Us</h2>
-        </div>
-        <div class="cs_height_72 cs_height_lg_50"></div>
-          <div class="col-lg-10 offset-lg-1">
-            <div class="cs_contact_form cs_style_1 cs_white_bg cs_radius_30">
-              <div class="row">
-                <div class="col-lg-6">
-                  <label class="cs_input_label cs_heading_color">Name</label>
-                  <input type="text" class="cs_form_field" placeholder="David John">
-                  <div class="cs_height_42 cs_height_xl_25"></div>
-                </div>
-                <div class="col-lg-6">
-                  <label class="cs_input_label cs_heading_color">Email</label>
-                  <input type="email" class="cs_form_field" placeholder="example@gmail.com">
-                  <div class="cs_height_42 cs_height_xl_25"></div>
-                </div>
-                <div class="col-lg-12">
-                  <label class="cs_input_label cs_heading_color">Mobile</label>
-                  <input type="text" class="cs_form_field" placeholder="Your subject">
-                  <div class="cs_height_42 cs_height_xl_25"></div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="cs_height_18"></div>
-                  <button class="cs_btn cs_style_1">
-                    <span>Submit</span>
-                  </button>
+      {# PART 2: TAB BODY SECTIONS (Loops text values matching anchor tokens) #}
+      {% if content.testimonials is defined and content.testimonials is not empty %}
+        <div class="cs_tab_body">
+          {% for testimonial in content.testimonials %}
+            
+            {% set itemRating = testimonial.rating|default(5) + 0 %}
+            {# Matches active status tracking properties directly on tab indexes #}
+            <div class="cs_tab{{ loop.index == 2 ? ' active' : '' }}" id="tab_{{ loop.index }}">
+              <div class="cs_testimonial cs_style_1">
+                {# Pure Inline W3C Compliant SVG Quote Icon - Replaces image asset dependency #}
+                <svg width="40" height="30" viewBox="0 0 50 38" fill="none" xmlns="http://w3.org" style="margin-bottom: 20px; display: block;">
+                  <path d="M39.5536 13.8357C39.4529 12.689 39.5299 9.57182 42.365 5.23719C42.5794 4.9101 42.5405 4.46895 42.2742 4.18851C41.1184 2.97105 40.4027 2.20281 39.9008 1.66522C39.2408 0.956385 38.9395 0.633403 38.4984 0.212251C38.204 -0.0665425 37.7584 -0.0713971 37.4609 0.201883C32.5193 4.73095 27.0307 14.0896 27.8249 25.5554C28.2903 32.2879 32.9527 37.1746 38.9105 37.1746C45.0246 37.1746 49.999 31.9359 49.999 25.4959C49.999 19.2832 45.3695 14.1884 39.5536 13.8357ZM38.9105 35.5288C33.7941 35.5288 29.788 31.2842 29.3829 25.4364C28.4895 12.5411 35.7671 4.1644 37.9659 1.94648C38.1803 2.16907 38.4252 2.43099 38.7861 2.81833C39.2209 3.28441 39.8161 3.92247 40.7163 4.87397C37.2747 10.459 37.924 14.4384 38.2085 15.0089C38.3436 15.2798 38.6205 15.4622 38.9105 15.4622C44.1633 15.4622 48.4365 19.9631 48.4365 25.4959C48.4365 31.0279 44.1633 35.5288 38.9105 35.5288Z" fill="#051935"/>
+                  <path d="M11.8071 13.8355C11.7056 12.692 11.7803 9.57721 14.6185 5.23699C14.8321 4.90989 14.7939 4.46874 14.5277 4.1883C13.3741 2.97323 12.6592 2.20581 12.158 1.66822C11.4958 0.957825 11.1936 0.633938 10.7527 0.212046C10.4582 -0.0667479 10.0126 -0.0707801 9.7151 0.200854C4.77354 4.72993 -0.715834 14.087 0.0768219 25.5552C0.543775 32.2868 5.20682 37.1744 11.1646 37.1744C17.2789 37.1744 22.2532 31.9357 22.2532 25.4957C22.2532 19.2823 17.6237 14.1867 11.8071 13.8355ZM11.1646 35.5286C6.04917 35.5286 2.04065 31.284 1.63479 25.4354C0.743697 12.5369 8.02135 4.16337 10.2201 1.94627C10.4353 2.16886 10.681 2.43243 11.0426 2.82059C11.4767 3.28667 12.071 3.92391 12.9698 4.87377C9.52815 10.4596 10.1774 14.4381 10.462 15.0079C10.5971 15.2787 10.8747 15.462 11.1646 15.462C16.4175 15.462 20.6907 19.9629 20.6907 25.4957C20.6907 31.0277 16.4175 35.5286 11.1646 35.5286Z" fill="#051935"/>
+                </svg>
+                
+                <p>{{ testimonial.text|default(testimonial.comment|default('No review text provided.'))|raw }}</p>
+                
+                <!-- Dynamic Multi-Class Star Rendering Blocks -->
+                <div class="cs_rating cs_accent_color_rating" data-rating="{{ itemRating }}">
+                  <div class="cs_rating_bg">
+                    {% for i in 1..5 %}
+                      <i class="fa-regular fa-star"></i>
+                    {% endfor %}
+                  </div>
+                  <div class="cs_rating_percentage">
+                    {% for i in 1..5 %}
+                      {% if i <= itemRating %}
+                        <i class="fa-solid fa-star"></i>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          {% endfor %}
         </div>
-        </div>
-        </div>
+      {% endif %}
 
+    </div>
+  </div>
 </section>
-<!-- End Testimonial Section -->
+<!-- End Review Section -->
