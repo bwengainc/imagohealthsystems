@@ -10,9 +10,11 @@ sulu_admin:
 sulu_core:
     locales:
         en: English
+        sw: Swahili
         fr: French
-       # sw: Swahili
+        
     translations:
         - en
+        - sw
         - fr
-       # - sw
+       

@@ -597,3 +597,13 @@ a:hover {
 .cs_list.cs_style_3 ul li span i {
     color: #CFAC62 !important;
 }
+
+
+.cs_blog_details_tags a {
+    border: 1px solid #CFAC62 !important;
+}
+
+.cs_blog_details_tags a:hover {
+  background-color: #051935 !important;
+  color:#ffffff !important;
+}

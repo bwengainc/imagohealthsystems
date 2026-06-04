@@ -8,7 +8,7 @@
     "Copyright": "Droits d'auteur",
     "All Rights Reserved": "Tous droits réservés",
     "Managed by": "Géré par",
-    "Recent Posts": "Actualités récentes",
+    "Recent News": "Actualités récentes",
     "Events - Announcements - Press Release - Adverts": "Événements - Annonces - Communiqués de presse - Publicités",
     "News & Recent Updates": "Nouvelles et mises à jour récentes",
     "Read more...": "Lire la suite...",
@@ -31,7 +31,10 @@
     "Appointment Schedules": "Horaires de rendez-vous",
     "Degrees": "Diplômes",
     "Experiences": "Expériences",
-    "Awards/Achievements": "Prix / Réalisations"
+    "Awards/Achievements": "Prix / Réalisations",
+    "blog": "Bloguer",
+    "article": "Article"
+    
 
 
 }

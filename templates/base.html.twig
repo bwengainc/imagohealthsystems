@@ -184,8 +184,13 @@
         <div class="cs_footer_in">
           <div class="cs_footer_col">
             <div class="cs_footer_item">
-              <div class="cs_text_widget">
-                <img src="http://imagohealthsystems.local/uploads/media/sulu-260x/07/17-Imago-v2.png?v=1-0" alt="Logo">
+              <div class="cs_text_widget">               
+{% set logo = sulu_resolve_media(17, app.request.locale) %}
+{% set logoSrc = logo.formats['260x'] is defined and logo.formats['260x'] is not empty
+    ? logo.formats['260x']
+    : logo.url %}
+<img src="{{ logoSrc }}" alt="{{ logo.title|default('Logo') }}">
+
                 <!--<p class="cs_medium">Imago Health Systems</p>-->
               </div>
               <ul class="cs_contact_widget">

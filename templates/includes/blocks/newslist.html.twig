@@ -42,8 +42,12 @@
                 <div class="cs_post_info">
                   <div>
                     <h2 class="cs_post_title cs_semibold cs_fs_32">
-                      <a href="{{ featured.routePath }}">{{ featured.title }}</a>
+                      <!--<a href="{{ featured.routePath }}">{{ featured.title }}</a>-->
+                      <a href="{{ sulu_content_path(featured.routePath) }}">{{ featured.title }}</a>
                     </h2>
+              
+
+                       
                     {% if featured.summary %}
                       <p class="cs_post_subtitle" style="font-size: 16px; color: #666; margin-top: 5px;">
                         {{ featured.summary }}
@@ -84,7 +88,7 @@
                   <div class="cs_post_info">
                     <div>
                       <h2 class="cs_post_title cs_semibold cs_fs_24">
-                        <a href="{{ news.routePath }}">{{ news.title }}</a>
+                        <a href="{{ sulu_content_path(news.routePath) }}">{{ news.title }}</a>
                       </h2>
                       {% if news.summary %}
                         <p class="cs_post_subtitle" style="font-size: 16px; color: #666; margin-top: 5px;">

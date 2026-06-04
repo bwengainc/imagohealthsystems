@@ -97,4 +97,12 @@
     </format>
 
 
+<format key="260x">
+<meta>
+            <title lang="en">Logo2</title>
+            <title lang="de">Logo2 Bild</title>
+        </meta>
+        <scale x="260"/>
+    </format>
+
 </formats>

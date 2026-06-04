@@ -6,25 +6,27 @@
 <div class="container"> 
     <ol class="breadcrumb"> 
         <li class="breadcrumb-item"><a href="/">{% trans %}Home{% endtrans %}</a></li> 
-        <li class="breadcrumb-item"><a href="/blog">{% trans %}Blog{% endtrans %}</a></li> 
+        <li class="breadcrumb-item">
+        {% if news.routePath is defined and news.routePath is not null %}
+    <a href="{#{ sulu_content_path(news.routePath) }#}#">
+        {{ news.type|trans }}
+    </a>
+{% endif %}
+        </li> 
         <li class="breadcrumb-item active">{{ news.title }}</li> 
     </ol> 
     <div class="cs_height_18"></div> 
-    
     {# Kichwa cha habari cha blog kutoka Sulu #}
     <h1 class="cs_fs_72 mb-0">{{ news.title }}</h1> 
     <div class="cs_height_54"></div> 
-    
     <div class="cs_blog_details_info"> 
         <div class="cs_blog_details_info_left"> 
             {# Makundi / Categories za habari #}
             <div class="cs_blog_details_tags"> 
     {% if news.type is defined and news.type is not null %}
-        <a href="#">{{ news.type }}</a>
+        <a href="#"> {{ news.type|trans }}</a>
     {% endif %}
 </div>
-
-            
             {# Tarehe na Mwandishi kutoka Sulu #}
             <div class="cs_blog_details_date">
                 {% if news.showDate %}
@@ -36,8 +38,7 @@
                     | {{ contact.fullName }}
                 {% endif %}
             </div> 
-        </div> 
-        
+        </div>         
     </div> 
     
     
@@ -86,6 +87,7 @@
                 {# 2. Popular Articles / Recent Posts kutoka Sulu #}
                 <div class="cs_sidebar_item"> 
                     <!--<h2 class="cs_sidebar_widget_title">{% trans %}Popular Articles{% endtrans %}</h2> -->
+                    <h3 class="widget-title">{% trans %}Recent News{% endtrans %}</h3>
                     <ul class="cs_popular_posts"> 
                         <li> 
                             <div class="cs_popular_post"> 

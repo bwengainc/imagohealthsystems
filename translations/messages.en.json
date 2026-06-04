@@ -8,14 +8,16 @@
     "Copyright":"Copyright",
     "All Rights Reserved":"All Rights Reserved",
     "Managed by":"Managed by",
-    "Recent Posts":"Recent News",
+    "Recent News":"Recent News",
     "Events - Announcements - Press Release - Adverts": "Events - Announcements - Press Release - Adverts",
     "News & Recent Updates": "News & Recent Updates",
     "Read more...": "Read more...",
     "Announcements":"Announcements",
     "Posted on": "Posted on",
     "View All": "View All",
-    "No popular posts available.": "No popular posts available."
+    "No popular posts available.": "No popular posts available.",
+    "blog": "Blog",
+    "article": "Article"
 
 
 
